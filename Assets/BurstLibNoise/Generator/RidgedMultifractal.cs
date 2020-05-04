@@ -2,16 +2,17 @@ using System;
 using UnityEngine;
 using Unity.Collections;
 using Unity.Mathematics;
+using BurstLibNoise.Manager;
 
 namespace BurstLibNoise.Generator
 {
     /// <summary>
     /// Provides a noise module that outputs 3-dimensional ridged-multifractal noise. [GENERATOR]
     /// </summary>
-    public class RidgedMultifractal
+    public static class RidgedMultifractal
     {
-        public static ModuleData GetData(float frequency=1.0f, float lacunarity=2.0f, int octaves=6, int seed=0) {
-            return new ModuleData(ModuleType.RidgedMultifractal, frequency, lacunarity, octaves, seed);
+        public static ModuleData GetData(this LibNoise.Generator.RidgedMultifractal ridgedMultifractal, int[] sources) {
+            return new ModuleData(ModuleType.RidgedMultifractal, sources, (float) ridgedMultifractal.Frequency, (float) ridgedMultifractal.Lacunarity, ridgedMultifractal.OctaveCount, ridgedMultifractal.Seed);
         }
 
         /// <summary>
@@ -21,7 +22,7 @@ namespace BurstLibNoise.Generator
         /// <param name="y">The input coordinate on the y-axis.</param>
         /// <param name="z">The input coordinate on the z-axis.</param>
         /// <returns>The resulting output value.</returns>
-        public static float GetValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
+        public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
             ModuleData perlinData = data[dataIndex];
             float frequency = perlinData[0];

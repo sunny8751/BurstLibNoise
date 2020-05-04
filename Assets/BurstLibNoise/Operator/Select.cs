@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Unity.Collections;
-using BurstLibNoise;
+using BurstLibNoise.Manager;
 
 namespace BurstLibNoise.Operator
 {
@@ -8,13 +8,11 @@ namespace BurstLibNoise.Operator
     /// Provides a noise module that outputs the value selected from one of two source
     /// modules chosen by the output value from a control module. [OPERATOR]
     /// </summary>
-    public class Select
+    public static class Select
     {
-        public static ModuleData GetData(float min=-1, float max=1, float fallOff=0) {
-            return new ModuleData(ModuleType.Select, min, max, fallOff);
+        public static ModuleData GetData(this LibNoise.Operator.Select select, int[] sources) {
+            return new ModuleData(ModuleType.Select, sources, (float) select.Minimum, (float) select.Maximum, (float) select.FallOff);
         }
-
-        #region ModuleBase Members
 
         /// <summary>
         /// Returns the output value for the given input coordinates.
@@ -23,50 +21,48 @@ namespace BurstLibNoise.Operator
         /// <param name="y">The input coordinate on the y-axis.</param>
         /// <param name="z">The input coordinate on the z-axis.</param>
         /// <returns>The resulting output value.</returns>
-        public static float GetValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
+        public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
             // Debug.Assert(dataIndex + 3 < data.Length);
             ModuleData selectData = data[dataIndex];
             float _min = selectData[0];
             float _max = selectData[1];
             float _fallOff = selectData[2];
-            float cv = ModuleBase.GetValue(x, y, z, data, dataIndex + 3);
+            float cv = BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(2));
             if (_fallOff > 0.0)
             {
                 float a;
                 if (cv < (_min - _fallOff))
                 {
-                    return ModuleBase.GetValue(x, y, z, data, dataIndex + 1);
+                    return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(0));
                 }
                 if (cv < (_min + _fallOff))
                 {
                     var lc = (_min - _fallOff);
                     var uc = (_min + _fallOff);
                     a = Utils.MapCubicSCurve((cv - lc) / (uc - lc));
-                    return Utils.InterpolateLinear(ModuleBase.GetValue(x, y, z, data, dataIndex + 1),
-                        ModuleBase.GetValue(x, y, z, data, dataIndex + 2), a);
+                    return Utils.InterpolateLinear(BurstModuleManager.GetBurstValue(x, y, z, data, dataIndex + 1),
+                        BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(1)), a);
                 }
                 if (cv < (_max - _fallOff))
                 {
-                    return ModuleBase.GetValue(x, y, z, data, dataIndex + 2);
+                    return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(1));
                 }
                 if (cv < (_max + _fallOff))
                 {
                     var lc = (_max - _fallOff);
                     var uc = (_max + _fallOff);
                     a = Utils.MapCubicSCurve((cv - lc) / (uc - lc));
-                    return Utils.InterpolateLinear(ModuleBase.GetValue(x, y, z, data, dataIndex + 2),
-                        ModuleBase.GetValue(x, y, z, data, dataIndex + 1), a);
+                    return Utils.InterpolateLinear(BurstModuleManager.GetBurstValue(x, y, z, data, dataIndex + 2),
+                        BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(0)), a);
                 }
-                return ModuleBase.GetValue(x, y, z, data, dataIndex + 1);
+                return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(0));
             }
             if (cv < _min || cv > _max)
             {
-                return ModuleBase.GetValue(x, y, z, data, dataIndex + 1);
+                return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(0));
             }
-            return ModuleBase.GetValue(x, y, z, data, dataIndex + 2);
+            return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(1));
         }
-
-        #endregion
     }
 }

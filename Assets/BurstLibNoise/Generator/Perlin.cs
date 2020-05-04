@@ -1,16 +1,17 @@
 using UnityEngine;
 using Unity.Mathematics;
 using Unity.Collections;
+using BurstLibNoise.Manager;
 
 namespace BurstLibNoise.Generator
 {
     /// <summary>
     /// Provides a noise module that outputs a three-dimensional perlin noise. [GENERATOR]
     /// </summary>
-    public class Perlin
+    public static class Perlin
     {
-        public static ModuleData GetData(float frequency=1.0f, float lacunarity=2.0f, float persistence=0.5f, int octaves=6, int seed=0) {
-            return new ModuleData(ModuleType.Perlin, frequency, lacunarity, persistence, octaves, seed);
+        public static ModuleData GetData(LibNoise.Generator.Perlin perlin, int[] sources) {
+            return new ModuleData(ModuleType.Perlin, sources, (float) perlin.Frequency, (float) perlin.Lacunarity, (float) perlin.Persistence, perlin.OctaveCount, perlin.Seed);
         }
 
         /// <summary>
@@ -20,7 +21,7 @@ namespace BurstLibNoise.Generator
         /// <param name="y">The input coordinate on the y-axis.</param>
         /// <param name="z">The input coordinate on the z-axis.</param>
         /// <returns>The resulting output value.</returns>
-        public static float GetValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
+        public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
             ModuleData perlinData = data[dataIndex];
             float frequency = perlinData[0];
@@ -39,9 +40,6 @@ namespace BurstLibNoise.Generator
             {
                 int newSeed = seed + i;
 
-                // System.Random random = new System.Random(seed);
-                // var signal = noise.snoise(new float3(x + random.Next(1000), y + random.Next(1000), z + random.Next(1000)));
-                // var signal = noise.snoise(new float3(x, y, z) + Utils.RandomOffset(newSeed));
                 var signal = Utils.GradientCoherentNoise3D(x, y, z, newSeed);
                 value += signal * amplitude;
                 x *= lacunarity;

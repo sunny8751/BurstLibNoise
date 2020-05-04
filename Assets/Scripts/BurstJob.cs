@@ -6,6 +6,8 @@ using Unity.Jobs;
 using UnityEngine;
 using BurstLibNoise;
 using BurstLibNoise.Generator;
+using BurstLibNoise.Manager;
+using System;
 
 /// <summary>
 /// A plane terrain density calculation job
@@ -34,12 +36,11 @@ struct BurstJob : IJobParallelFor
         int positionZ = (index % width);
 
         heightmap[index] = Calculate(positionX, positionY, positionZ);
-        // Debug.Log(positionX + ", " + positionY + ", " + positionZ);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public float Calculate(int x, int y, int z)
     {
-        return ModuleBase.GetValue(x * scale, y * scale, z * scale, moduleData, 0);
+        return BurstModuleManager.GetBurstValue(x * scale, y * scale, z * scale, moduleData, 0);
     }
 }
