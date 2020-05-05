@@ -80,18 +80,5 @@ namespace BurstLibNoise
                     return 0;
             }
         }
-
-        // public static ModuleData GetModuleData(LibNoise.ModuleBase module, int[] sources)
-        // {
-        //     switch (module.GetType())
-        //     {
-        //         case typeof(LibNoise.Generator.Perlin):
-        //             return Perlin.GetData((LibNoise.Generator.Perlin) module, sources);
-        //         default:
-        //             // Debug.LogError("Not a valid module type");
-        //             // return ;
-        //             throw new System.NotSupportedException();
-        //     }
-        // }
     }
 }
