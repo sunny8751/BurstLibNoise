@@ -32,7 +32,9 @@ public class BurstJobTest : MonoBehaviour
 		finalTerrain.SetBounds(0, 1000);
 		finalTerrain.FallOff = 0.125;
 
+        float start = Time.realtimeSinceStartup;
         Run(finalTerrain);
+        Debug.Log(Time.realtimeSinceStartup - start);
     }
 
     private List<ModuleData> GetModuleData(BurstModuleBase root) {

@@ -40,20 +40,20 @@ namespace BurstLibNoise
 
     public struct ModuleData
     {
-        const int NUM_PARAMS = 6;
+        private const int NUM_PARAMS = 6;
 
-        public ModuleType type;
-        public float param1;
-        public float param2;
-        public float param3;
-        public float param4;
-        public float param5;
-        public float param6;
+        public readonly ModuleType type;
+        public readonly float param1;
+        public readonly float param2;
+        public readonly float param3;
+        public readonly float param4;
+        public readonly float param5;
+        public readonly float param6;
 
-        public int source1;
-        public int source2;
-        public int source3;
-        public int source4;
+        public readonly int source1;
+        public readonly int source2;
+        public readonly int source3;
+        public readonly int source4;
 
         public ModuleData(ModuleType type, int[] sources, float param1 = 0, float param2 = 0, float param3 = 0, float param4 = 0, float param5 = 0, float param6 = 0)
         {
@@ -112,32 +112,6 @@ namespace BurstLibNoise
                     case 3: return param4;
                     case 4: return param5;
                     case 5: return param6;
-                    default: throw new System.IndexOutOfRangeException();
-                }
-            }
-            set
-            {
-                Debug.Assert(index >= 0 && index < NUM_PARAMS);
-                switch (index)
-                {
-                    case 0:
-                        param1 = value;
-                        break;
-                    case 1:
-                        param2 = value;
-                        break;
-                    case 2:
-                        param3 = value;
-                        break;
-                    case 3:
-                        param4 = value;
-                        break;
-                    case 4:
-                        param5 = value;
-                        break;
-                    case 5:
-                        param6 = value;
-                        break;
                     default: throw new System.IndexOutOfRangeException();
                 }
             }
