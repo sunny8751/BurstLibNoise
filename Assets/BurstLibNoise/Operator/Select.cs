@@ -48,7 +48,7 @@ namespace BurstLibNoise.Operator
                     var lc = (_min - _fallOff);
                     var uc = (_min + _fallOff);
                     a = Utils.MapCubicSCurve((cv - lc) / (uc - lc));
-                    return Utils.InterpolateLinear(BurstModuleManager.GetBurstValue(x, y, z, data, dataIndex + 1),
+                    return Utils.InterpolateLinear(BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0)),
                         BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(1)), a);
                 }
                 if (cv < (_max - _fallOff))
@@ -60,7 +60,7 @@ namespace BurstLibNoise.Operator
                     var lc = (_max - _fallOff);
                     var uc = (_max + _fallOff);
                     a = Utils.MapCubicSCurve((cv - lc) / (uc - lc));
-                    return Utils.InterpolateLinear(BurstModuleManager.GetBurstValue(x, y, z, data, dataIndex + 2),
+                    return Utils.InterpolateLinear(BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(1)),
                         BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0)), a);
                 }
                 return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0));
