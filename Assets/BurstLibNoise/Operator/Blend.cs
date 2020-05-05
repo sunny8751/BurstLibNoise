@@ -33,7 +33,7 @@ namespace BurstLibNoise.Operator
             var a = BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0));
             var b = BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(1));
             var c = (BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(2)) + 1.0f) / 2.0f;
-            return Utils.InterpolateLinear(a, b, c);
+            return (float) Utils.InterpolateLinear(a, b, c);
         }
 
         #region Constructors

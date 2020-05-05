@@ -26,9 +26,9 @@ namespace BurstLibNoise.Generator
         /// <returns>The resulting output value.</returns>
         public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
-            var ix = (int) (math.floor(x));
-            var iy = (int) (math.floor(y));
-            var iz = (int) (math.floor(z));
+            var ix = (int) (math.floor(Utils.MakeInt32Range(x)));
+            var iy = (int) (math.floor(Utils.MakeInt32Range(y)));
+            var iz = (int) (math.floor(Utils.MakeInt32Range(z)));
             return (ix & 1 ^ iy & 1 ^ iz & 1) != 0 ? -1.0f : 1.0f;
         }
 

@@ -48,9 +48,9 @@ namespace BurstLibNoise.Generator
                 {
                     for (var xcu = xi - 2; xcu <= xi + 2; xcu++)
                     {
-                        var xp = xcu + Utils.ValueNoise3D(xcu, ycu, zcu, _seed);
-                        var yp = ycu + Utils.ValueNoise3D(xcu, ycu, zcu, _seed + 1);
-                        var zp = zcu + Utils.ValueNoise3D(xcu, ycu, zcu, _seed + 2);
+                        var xp = xcu + (float) Utils.ValueNoise3D(xcu, ycu, zcu, _seed);
+                        var yp = ycu + (float) Utils.ValueNoise3D(xcu, ycu, zcu, _seed + 1);
+                        var zp = zcu + (float) Utils.ValueNoise3D(xcu, ycu, zcu, _seed + 2);
                         var xd = xp - x;
                         var yd = yp - y;
                         var zd = zp - z;
@@ -71,13 +71,13 @@ namespace BurstLibNoise.Generator
                 var xd = xc - x;
                 var yd = yc - y;
                 var zd = zc - z;
-                v = (math.sqrt(xd * xd + yd * yd + zd * zd)) * Utils.Sqrt3 - 1.0f;
+                v = (math.sqrt(xd * xd + yd * yd + zd * zd)) * (float) Utils.Sqrt3 - 1.0f;
             }
             else
             {
                 v = 0.0f;
             }
-            return v + (_displacement * Utils.ValueNoise3D((int) (math.floor(xc)), (int) (math.floor(yc)),
+            return v + (_displacement * (float) Utils.ValueNoise3D((int) (math.floor(xc)), (int) (math.floor(yc)),
                 (int) (math.floor(zc)), 0));
         }
 

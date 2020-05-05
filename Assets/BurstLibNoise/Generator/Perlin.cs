@@ -50,9 +50,11 @@ namespace BurstLibNoise.Generator
             z *= frequency;
             for (var i = 0; i < octaveCount; i++)
             {
+                var nx = Utils.MakeInt32Range(x);
+                var ny = Utils.MakeInt32Range(y);
+                var nz = Utils.MakeInt32Range(z);
                 int newSeed = seed + i;
-
-                var signal = Utils.GradientCoherentNoise3D(x, y, z, newSeed);
+                var signal = (float) Utils.GradientCoherentNoise3D(nx, ny, nz, newSeed);
                 value += signal * amplitude;
                 x *= lacunarity;
                 y *= lacunarity;
