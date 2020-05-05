@@ -23,8 +23,8 @@ namespace BurstLibNoise.Manager
                 //     return Checker.GetBurstValue(x, y, z, data, dataIndex);
                 // case ModuleType.Const:
                 //     return Const.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Cyclinders:
-                //     return Cyclinders.GetBurstValue(x, y, z, data, dataIndex);
+                // case ModuleType.Cylinders:
+                //     return Cylinders.GetBurstValue(x, y, z, data, dataIndex);
                 case ModuleType.Perlin:
                     return Perlin.GetBurstValue(x, y, z, data, dataIndex);
                 case ModuleType.RidgedMultifractal:

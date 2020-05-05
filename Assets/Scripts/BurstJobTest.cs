@@ -7,7 +7,6 @@ using BurstLibNoise;
 using BurstLibNoise.Generator;
 using BurstLibNoise.Operator;
 using BurstLibNoise.Manager;
-using Unity.Mathematics;
 using LibNoise;
 
 public class BurstJobTest : MonoBehaviour

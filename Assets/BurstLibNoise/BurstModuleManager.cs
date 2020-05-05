@@ -34,7 +34,7 @@ namespace BurstLibNoise.Manager
 
     public enum ModuleType
     {
-        Billow, Checker, Const, Cyclinders, Perlin, RidgedMultifractal, Spheres, Voronoi,
+        Billow, Checker, Const, Cylinders, Perlin, RidgedMultifractal, Spheres, Voronoi,
         Abs, Add, Blend, Cache, Clamp, Curve, Displace, Exponent, Invert, Max, Min, Multiply, Power, Rotate, Scale, ScaleBias, Select, Subtract, Terrace, Translate, Turbulence
     };
 
