@@ -17,8 +17,8 @@ namespace BurstLibNoise.Manager
         {
             switch (type)
             {
-                // case ModuleType.Billow:
-                //     return Billow.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Billow:
+                    return Billow.GetBurstValue(x, y, z, data, dataIndex);
                 // case ModuleType.Checker:
                 //     return Checker.GetBurstValue(x, y, z, data, dataIndex);
                 // case ModuleType.Const:
@@ -63,8 +63,8 @@ namespace BurstLibNoise.Manager
                 //     return Rotate.GetBurstValue(x, y, z, data, dataIndex);
                 // case ModuleType.Scale:
                 //     return Scale.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.ScaleBias:
-                //     return ScaleBias.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.ScaleBias:
+                    return ScaleBias.GetBurstValue(x, y, z, data, dataIndex);
                 case ModuleType.Select:
                     return Select.GetBurstValue(x, y, z, data, dataIndex);
                 // case ModuleType.Subtract:

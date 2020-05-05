@@ -14,25 +14,24 @@ public class LibNoiseTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		// // STEP 1
-		// // Gradient is set directly on the object
-		// var mountainTerrain = new RidgedMultifractal();
+		// STEP 1
+		// Gradient is set directly on the object
+		var mountainTerrain = new RidgedMultifractal();
 		// // STEP 2
-		// var baseFlatTerrain = new Billow();
-		// baseFlatTerrain.Frequency = 2.0;
-		// // STEP 3
-		// var flatTerrain = new ScaleBias(0.125, -0.75, baseFlatTerrain);
-		// // STEP 4
-		// var terrainType = new Perlin();
-		// terrainType.Frequency = 0.5;
-		// terrainType.Persistence = 0.25;
+		var baseFlatTerrain = new Billow();
+		baseFlatTerrain.Frequency = 2.0;
+		// STEP 3
+		var flatTerrain = new ScaleBias(0.125, -0.75, baseFlatTerrain);
+		// STEP 4
+		var terrainType = new Perlin();
+		terrainType.Frequency = 0.5;
+		terrainType.Persistence = 0.25;
 
-		// var finalTerrain = new Select(flatTerrain, mountainTerrain, terrainType);
-		// finalTerrain.SetBounds(0, 1000);
-		// finalTerrain.FallOff = 0.125;
+		var finalTerrain = new Select(flatTerrain, mountainTerrain, terrainType);
+		finalTerrain.SetBounds(0, 1000);
+		finalTerrain.FallOff = 0.125;
 
-        var terrain = new Perlin();
-        RenderAndSetImage(terrain);
+        RenderAndSetImage(finalTerrain);
     }
 
 	void RenderAndSetImage(ModuleBase generator)

@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Unity.Collections;
 using BurstLibNoise.Manager;
+using LibNoise;
 
 namespace BurstLibNoise.Operator
 {
@@ -8,10 +9,15 @@ namespace BurstLibNoise.Operator
     /// Provides a noise module that outputs the value selected from one of two source
     /// modules chosen by the output value from a control module. [OPERATOR]
     /// </summary>
-    public static class Select
+    public class Select : LibNoise.Operator.Select, BurstModuleBase
     {
-        public static ModuleData GetData(this LibNoise.Operator.Select select, int[] sources) {
-            return new ModuleData(ModuleType.Select, sources, (float) select.Minimum, (float) select.Maximum, (float) select.FallOff);
+        public ModuleData GetData(int[] sources) {
+            return new ModuleData(ModuleType.Select, sources, (float) Minimum, (float) Maximum, (float) FallOff);
+        }
+
+        // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
+        public BurstModuleBase Source(int i) {
+            return (BurstModuleBase) Modules[i];
         }
 
         /// <summary>
@@ -28,6 +34,7 @@ namespace BurstLibNoise.Operator
             float _min = selectData[0];
             float _max = selectData[1];
             float _fallOff = selectData[2];
+            
             float cv = BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(2));
             if (_fallOff > 0.0)
             {
@@ -64,5 +71,41 @@ namespace BurstLibNoise.Operator
             }
             return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(1));
         }
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of Select.
+        /// </summary>
+        public Select()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of Select.
+        /// </summary>
+        /// <param name="inputA">The first input module.</param>
+        /// <param name="inputB">The second input module.</param>
+        /// <param name="controller">The controller module.</param>
+        public Select(ModuleBase inputA, ModuleBase inputB, ModuleBase controller)
+            : base(inputA, inputB, controller)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of Select.
+        /// </summary>
+        /// <param name="min">The minimum value.</param>
+        /// <param name="max">The maximum value.</param>
+        /// <param name="fallOff">The falloff value at the edge transition.</param>
+        /// <param name="inputA">The first input module.</param>
+        /// <param name="inputB">The second input module.</param>
+        public Select(double min, double max, double fallOff, ModuleBase inputA, ModuleBase inputB)
+            : base(min, max, fallOff, inputA, inputB)
+        {
+        }
+
+        #endregion
     }
 }

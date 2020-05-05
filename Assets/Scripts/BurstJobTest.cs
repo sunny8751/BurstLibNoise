@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Collections;
 using Unity.Jobs;
-// using BurstLibNoise;
-// using BurstLibNoise.Generator;
-// using BurstLibNoise.Operator;
-using LibNoise;
-using LibNoise.Generator;
-using LibNoise.Operator;
+using BurstLibNoise;
+using BurstLibNoise.Generator;
+using BurstLibNoise.Operator;
 using BurstLibNoise.Manager;
 using Unity.Mathematics;
+using LibNoise;
 
 public class BurstJobTest : MonoBehaviour
 {
@@ -19,46 +17,46 @@ public class BurstJobTest : MonoBehaviour
 	[SerializeField] int Height = 0;
 
     private void Start() {
-        // int seed = 0;
-        // System.Random random = new System.Random(seed);
+		// STEP 1
+		// Gradient is set directly on the object
+		var mountainTerrain = new RidgedMultifractal();
+		// // STEP 2
+		var baseFlatTerrain = new Billow();
+		baseFlatTerrain.Frequency = 2.0;
+		// STEP 3
+		var flatTerrain = new ScaleBias(0.125, -0.75, baseFlatTerrain);
+		// STEP 4
+		var terrainType = new Perlin();
+		terrainType.Frequency = 0.5;
+		terrainType.Persistence = 0.25;
 
-        // List<ModuleData> modules = new List<ModuleData>();
-        // // modules.Add(Perlin.GetData(seed: Seed(random)));
-        // modules.Add(RidgedMultifractal.GetData(seed: Seed(random)));
+		var finalTerrain = new Select(flatTerrain, mountainTerrain, terrainType);
+		finalTerrain.SetBounds(0, 1000);
+		finalTerrain.FallOff = 0.125;
 
-		// // var mountainTerrain = new RidgedMultifractal();
-		// // var baseFlatTerrain = new Billow.GetData(frequency: 2.0f);
-		// // var flatTerrain = new ScaleBias.GetData(0.125, -0.75, baseFlatTerrain);
-		// // var terrainType = new Perlin.GetData(frequency: 0.5f, persistence: 0.25f);
-		// // var finalTerrain = new Select.GetData(min: 0, max: 1000, fallOff: 0.125f);//(flatTerrain, mountainTerrain, terrainType);
-
-        var terrain = new Perlin();
-        Run(terrain);
+        Run(finalTerrain);
     }
 
-    private List<ModuleData> GetModuleData(ModuleBase root) {
+    private List<ModuleData> GetModuleData(BurstModuleBase root) {
         List<ModuleData> modules = new List<ModuleData>();
-        Queue<ModuleBase> queue = new Queue<ModuleBase>();
+        Queue<BurstModuleBase> queue = new Queue<BurstModuleBase>();
         queue.Enqueue(root);
 
         while (queue.Count > 0) {
-            ModuleBase module = queue.Dequeue();
-            int[] sourceIndices = new int[module.SourceModuleCount];
+            BurstModuleBase module = queue.Dequeue();
+            int[] sourceIndices = new int[((ModuleBase) module).SourceModuleCount];
             for (int i = 0; i < sourceIndices.Length; i++) {
-                queue.Enqueue(module.Modules[i]);
+                queue.Enqueue(module.Source(i));
                 sourceIndices[i] = modules.Count + i + 1; // add one for the current module
             }
             modules.Add(module.GetData(sourceIndices));
+            Debug.Log(module.GetData(sourceIndices).type);
         }
         return modules;
     }
 
-    public void Run(ModuleBase module) {
+    public void Run(BurstModuleBase module) {
         List<ModuleData> modules = GetModuleData(module);
-
-        foreach (ModuleData data in modules) {
-            Debug.Log(data.type);
-        }
 
         // TODO replace with unsafe mem copy
         NativeArray<ModuleData> moduleData = new NativeArray<ModuleData>(modules.Count, Allocator.Persistent);
@@ -90,8 +88,8 @@ public class BurstJobTest : MonoBehaviour
             value = (value + 1) / 2;
             colors[i] = new Color(value, value, value, 1);
         }
-        // Debug.Log(colors[0]);
-        // Debug.Log(colors[5]);
+        Debug.Log(colors[0]);
+        Debug.Log(colors[5]);
         texture.SetPixels(colors);
         texture.wrapMode = TextureWrapMode.Clamp;
         texture.Apply();

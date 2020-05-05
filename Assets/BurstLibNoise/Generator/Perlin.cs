@@ -2,16 +2,22 @@ using UnityEngine;
 using Unity.Mathematics;
 using Unity.Collections;
 using BurstLibNoise.Manager;
+using LibNoise;
 
 namespace BurstLibNoise.Generator
 {
     /// <summary>
     /// Provides a noise module that outputs a three-dimensional perlin noise. [GENERATOR]
     /// </summary>
-    public static class Perlin
+    public class Perlin : LibNoise.Generator.Perlin, BurstModuleBase
     {
-        public static ModuleData GetData(LibNoise.Generator.Perlin perlin, int[] sources) {
-            return new ModuleData(ModuleType.Perlin, sources, (float) perlin.Frequency, (float) perlin.Lacunarity, (float) perlin.Persistence, perlin.OctaveCount, perlin.Seed);
+        public ModuleData GetData(int[] sources) {
+            return new ModuleData(ModuleType.Perlin, sources, (float) Frequency, (float) Lacunarity, (float) Persistence, OctaveCount, Seed);
+        }
+
+        // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
+        public BurstModuleBase Source(int i) {
+            return (BurstModuleBase) Modules[i];
         }
 
         /// <summary>
@@ -49,5 +55,32 @@ namespace BurstLibNoise.Generator
             }
             return value;
         }
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of Perlin.
+        /// </summary>
+        public Perlin()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of Perlin.
+        /// </summary>
+        /// <param name="frequency">The frequency of the first octave.</param>
+        /// <param name="lacunarity">The lacunarity of the perlin noise.</param>
+        /// <param name="persistence">The persistence of the perlin noise.</param>
+        /// <param name="octaves">The number of octaves of the perlin noise.</param>
+        /// <param name="seed">The seed of the perlin noise.</param>
+        /// <param name="quality">The quality of the perlin noise.</param>
+        public Perlin(double frequency, double lacunarity, double persistence, int octaves, int seed,
+            QualityMode quality)
+            : base(frequency, lacunarity, persistence, octaves, seed, quality)
+        {
+        }
+
+        #endregion
     }
 }

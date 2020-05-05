@@ -17,17 +17,6 @@ namespace BurstLibNoise.Manager
     public static class BurstModuleManager
     {
 
-        public static ModuleData GetData(this LibNoise.ModuleBase module, int[] sources) {
-            // (BurstLibNoise.Manager.ModuleData) this.GetType().GetMethod("GetData").Invoke(this, new System.Object[]{sources});
-            // (float) mapping[type].GetMethod("GetBurstValue").Invoke(null, new System.Object[]{x, y, z, data, dataIndex});
-            return BurstLibNoise.Generator.Perlin.GetData((LibNoise.Generator.Perlin) module, sources);
-        }
-
-        // public static T GetPersonInstance<T>(this ModuleType type)
-        // {
-        //     return (T)Activator.CreateInstance(mapping[type]);
-        // }
-
         /// <summary>
         /// Returns the output value for the given input coordinates.
         /// </summary>

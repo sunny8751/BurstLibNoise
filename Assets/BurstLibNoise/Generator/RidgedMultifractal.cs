@@ -3,16 +3,22 @@ using UnityEngine;
 using Unity.Collections;
 using Unity.Mathematics;
 using BurstLibNoise.Manager;
+using LibNoise;
 
 namespace BurstLibNoise.Generator
 {
     /// <summary>
     /// Provides a noise module that outputs 3-dimensional ridged-multifractal noise. [GENERATOR]
     /// </summary>
-    public static class RidgedMultifractal
+    public class RidgedMultifractal : LibNoise.Generator.RidgedMultifractal, BurstModuleBase
     {
-        public static ModuleData GetData(this LibNoise.Generator.RidgedMultifractal ridgedMultifractal, int[] sources) {
-            return new ModuleData(ModuleType.RidgedMultifractal, sources, (float) ridgedMultifractal.Frequency, (float) ridgedMultifractal.Lacunarity, ridgedMultifractal.OctaveCount, ridgedMultifractal.Seed);
+        public ModuleData GetData(int[] sources) {
+            return new ModuleData(ModuleType.RidgedMultifractal, sources, (float) Frequency, (float) Lacunarity, OctaveCount, Seed);
+        }
+
+        // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
+        public BurstModuleBase Source(int i) {
+            return (BurstModuleBase) Modules[i];
         }
 
         /// <summary>
@@ -25,10 +31,10 @@ namespace BurstLibNoise.Generator
         public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
             ModuleData perlinData = data[dataIndex];
-            float frequency = perlinData[0];
-            float lacunarity = perlinData[1];
-            int octaves = (int) perlinData[2];
-            int seed = (int) perlinData[3];
+            float _frequency = perlinData[0];
+            float _lacunarity = perlinData[1];
+            int _octaveCount = (int) perlinData[2];
+            int _seed = (int) perlinData[3];
             
             float exponent = 1.0f;
             float gain = 2.0f;
@@ -37,14 +43,14 @@ namespace BurstLibNoise.Generator
             float value   = 0.0f;
             float weight  = 1.0f;
 
-            x *= frequency;
-            y *= frequency;
-            z *= frequency;
+            x *= _frequency;
+            y *= _frequency;
+            z *= _frequency;
             var f = 1.0f;
-            for (var i = 0; i < octaves; i++)
+            for (var i = 0; i < _octaveCount; i++)
             {
-                int newSeed   = seed + i;
-                var signal  = Utils.GradientCoherentNoise3D(x, y, z, newSeed);
+                int seed   = _seed + i;
+                var signal  = Utils.GradientCoherentNoise3D(x, y, z, seed);
                 signal = math.abs(signal);
                 signal = offset - signal;
                 signal *= signal;
@@ -53,13 +59,38 @@ namespace BurstLibNoise.Generator
                 weight = math.clamp((float) weight, 0, 1);
 
                 value += (signal * math.pow(f, -exponent));
-                f *= lacunarity;
+                f *= _lacunarity;
 
-                x *= lacunarity;
-                y *= lacunarity;
-                z *= lacunarity;
+                x *= _lacunarity;
+                y *= _lacunarity;
+                z *= _lacunarity;
             }
             return (value * 1.25f) - 1.0f;
         }
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of RidgedMultifractal.
+        /// </summary>
+        public RidgedMultifractal()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of RidgedMultifractal.
+        /// </summary>
+        /// <param name="frequency">The frequency of the first octave.</param>
+        /// <param name="lacunarity">The lacunarity of the ridged-multifractal noise.</param>
+        /// <param name="octaves">The number of octaves of the ridged-multifractal noise.</param>
+        /// <param name="seed">The seed of the ridged-multifractal noise.</param>
+        /// <param name="quality">The quality of the ridged-multifractal noise.</param>
+        public RidgedMultifractal(double frequency, double lacunarity, int octaves, int seed, QualityMode quality)
+            : base(frequency, lacunarity, octaves, seed, quality)
+        {
+        }
+
+        #endregion
     }
 }
