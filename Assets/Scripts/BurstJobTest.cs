@@ -34,7 +34,7 @@ public class BurstJobTest : MonoBehaviour
 
         float start = Time.realtimeSinceStartup;
         Run(finalTerrain);
-        Debug.Log(Time.realtimeSinceStartup - start);
+        Debug.Log("BurstLibNoise runtime: " + (Time.realtimeSinceStartup - start));
     }
 
     private List<ModuleData> GetModuleData(BurstModuleBase root) {
@@ -50,7 +50,7 @@ public class BurstJobTest : MonoBehaviour
                 sourceIndices[i] = modules.Count + i + 1; // add one for the current module
             }
             modules.Add(module.GetData(sourceIndices));
-            Debug.Log(module.GetData(sourceIndices).type);
+            // Debug.Log(module.GetData(sourceIndices).type);
         }
         return modules;
     }

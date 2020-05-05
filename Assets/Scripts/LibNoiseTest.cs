@@ -31,7 +31,9 @@ public class LibNoiseTest : MonoBehaviour
 		finalTerrain.SetBounds(0, 1000);
 		finalTerrain.FallOff = 0.125;
 
+        float start = Time.realtimeSinceStartup;
         RenderAndSetImage(finalTerrain);
+        Debug.Log("LibNoise runtime: " + (Time.realtimeSinceStartup - start));
     }
 
 	void RenderAndSetImage(ModuleBase generator)
