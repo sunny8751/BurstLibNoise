@@ -2,7 +2,7 @@ using System;
 using System.Xml.Serialization;
 using UnityEngine;
 using Debug = System.Diagnostics.Debug;
-using BurstLibNoise.Manager;
+using BurstLibNoise;
 using Unity.Collections;
 using LibNoise;
 

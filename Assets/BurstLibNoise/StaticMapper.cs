@@ -9,7 +9,7 @@ using BurstLibNoise;
 using BurstLibNoise.Generator;
 using BurstLibNoise.Operator;
 
-namespace BurstLibNoise.Manager
+namespace BurstLibNoise
 {
     public static class StaticMapper
     {
@@ -19,20 +19,20 @@ namespace BurstLibNoise.Manager
             {
                 case ModuleType.Billow:
                     return Billow.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Checker:
-                //     return Checker.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Const:
-                //     return Const.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Cylinders:
-                //     return Cylinders.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Checker:
+                    return Checker.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Const:
+                    return Const.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Cylinders:
+                    return Cylinders.GetBurstValue(x, y, z, data, dataIndex);
                 case ModuleType.Perlin:
                     return Perlin.GetBurstValue(x, y, z, data, dataIndex);
                 case ModuleType.RidgedMultifractal:
                     return RidgedMultifractal.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Spheres:
-                //     return Spheres.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Voronoi:
-                //     return Voronoi.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Spheres:
+                    return Spheres.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Voronoi:
+                    return Voronoi.GetBurstValue(x, y, z, data, dataIndex);
                 // case ModuleType.Abs:
                 //     return Abs.GetBurstValue(x, y, z, data, dataIndex);
                 // case ModuleType.Add:

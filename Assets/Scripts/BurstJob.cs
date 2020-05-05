@@ -6,7 +6,6 @@ using Unity.Jobs;
 using UnityEngine;
 using BurstLibNoise;
 using BurstLibNoise.Generator;
-using BurstLibNoise.Manager;
 using System;
 
 /// <summary>

@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Unity.Collections;
-using BurstLibNoise.Manager;
+using BurstLibNoise;
 using LibNoise;
 
 namespace BurstLibNoise.Operator
@@ -30,18 +30,18 @@ namespace BurstLibNoise.Operator
         public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
             // Debug.Assert(dataIndex + 3 < data.Length);
-            ModuleData selectData = data[dataIndex];
-            float _min = selectData[0];
-            float _max = selectData[1];
-            float _fallOff = selectData[2];
+            ModuleData moduleData = data[dataIndex];
+            float _min = moduleData[0];
+            float _max = moduleData[1];
+            float _fallOff = moduleData[2];
             
-            float cv = BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(2));
+            float cv = BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(2));
             if (_fallOff > 0.0)
             {
                 float a;
                 if (cv < (_min - _fallOff))
                 {
-                    return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(0));
+                    return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0));
                 }
                 if (cv < (_min + _fallOff))
                 {
@@ -49,11 +49,11 @@ namespace BurstLibNoise.Operator
                     var uc = (_min + _fallOff);
                     a = Utils.MapCubicSCurve((cv - lc) / (uc - lc));
                     return Utils.InterpolateLinear(BurstModuleManager.GetBurstValue(x, y, z, data, dataIndex + 1),
-                        BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(1)), a);
+                        BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(1)), a);
                 }
                 if (cv < (_max - _fallOff))
                 {
-                    return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(1));
+                    return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(1));
                 }
                 if (cv < (_max + _fallOff))
                 {
@@ -61,15 +61,15 @@ namespace BurstLibNoise.Operator
                     var uc = (_max + _fallOff);
                     a = Utils.MapCubicSCurve((cv - lc) / (uc - lc));
                     return Utils.InterpolateLinear(BurstModuleManager.GetBurstValue(x, y, z, data, dataIndex + 2),
-                        BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(0)), a);
+                        BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0)), a);
                 }
-                return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(0));
+                return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0));
             }
             if (cv < _min || cv > _max)
             {
-                return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(0));
+                return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0));
             }
-            return BurstModuleManager.GetBurstValue(x, y, z, data, selectData.Source(1));
+            return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(1));
         }
 
         #region Constructors

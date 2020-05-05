@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Unity.Mathematics;
 using Unity.Collections;
-using BurstLibNoise.Manager;
+using BurstLibNoise;
 using LibNoise;
 
 namespace BurstLibNoise.Generator
@@ -26,12 +26,12 @@ namespace BurstLibNoise.Generator
         /// <returns>The resulting output value.</returns>
         public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
-            ModuleData perlinData = data[dataIndex];
-            float _frequency = perlinData[0];
-            float _lacunarity = perlinData[1];
-            float _persistence = perlinData[2];
-            int _octaveCount = (int) perlinData[3];
-            int _seed = (int) perlinData[4];
+            ModuleData moduleData = data[dataIndex];
+            float _frequency = moduleData[0];
+            float _lacunarity = moduleData[1];
+            float _persistence = moduleData[2];
+            int _octaveCount = (int) moduleData[3];
+            int _seed = (int) moduleData[4];
 
             var value       = 0.0f;
             var amplitude   = 1.0f;

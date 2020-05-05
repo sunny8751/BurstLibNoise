@@ -6,7 +6,6 @@ using Unity.Jobs;
 using BurstLibNoise;
 using BurstLibNoise.Generator;
 using BurstLibNoise.Operator;
-using BurstLibNoise.Manager;
 using LibNoise;
 
 public class BurstJobTest : MonoBehaviour
@@ -87,8 +86,8 @@ public class BurstJobTest : MonoBehaviour
             value = (value + 1) / 2;
             colors[i] = new Color(value, value, value, 1);
         }
-        Debug.Log(colors[0]);
-        Debug.Log(colors[5]);
+        // Debug.Log(colors[0]);
+        // Debug.Log(colors[5]);
         texture.SetPixels(colors);
         texture.wrapMode = TextureWrapMode.Clamp;
         texture.Apply();

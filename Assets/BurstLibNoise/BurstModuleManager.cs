@@ -9,7 +9,7 @@ using BurstLibNoise;
 using BurstLibNoise.Generator;
 using BurstLibNoise.Operator;
 
-namespace BurstLibNoise.Manager
+namespace BurstLibNoise
 {
     /// <summary>
     /// Base class for noise modules.

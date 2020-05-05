@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Unity.Collections;
-using BurstLibNoise.Manager;
+using BurstLibNoise;
 using LibNoise;
 
 namespace BurstLibNoise.Operator
@@ -29,11 +29,11 @@ namespace BurstLibNoise.Operator
         /// <returns>The resulting output value.</returns>
         public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
-            ModuleData scaleBiasData = data[dataIndex];
-            float _scale = scaleBiasData[0];
-            float _bias = scaleBiasData[1];
+            ModuleData moduleData = data[dataIndex];
+            float _scale = moduleData[0];
+            float _bias = moduleData[1];
             
-            return BurstModuleManager.GetBurstValue(x, y, z, data, scaleBiasData.Source(0)) * _scale + _bias;
+            return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0)) * _scale + _bias;
         }
 
         #region Constructors
