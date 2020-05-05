@@ -33,48 +33,48 @@ namespace BurstLibNoise
                     return Spheres.GetBurstValue(x, y, z, data, dataIndex);
                 case ModuleType.Voronoi:
                     return Voronoi.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Abs:
-                //     return Abs.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Add:
-                //     return Add.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Blend:
-                //     return Blend.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Abs:
+                    return Abs.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Add:
+                    return Add.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Blend:
+                    return Blend.GetBurstValue(x, y, z, data, dataIndex);
                 // case ModuleType.Cache:
                 //     return Cache.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Clamp:
-                //     return Clamp.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Clamp:
+                    return Clamp.GetBurstValue(x, y, z, data, dataIndex);
                 // case ModuleType.Curve:
                 //     return Curve.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Displace:
-                //     return Displace.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Exponent:
-                //     return Exponent.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Invert:
-                //     return Invert.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Max:
-                //     return Max.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Min:
-                //     return Min.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Multiply:
-                //     return Multiply.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Power:
-                //     return Power.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Rotate:
-                //     return Rotate.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Scale:
-                //     return Scale.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Displace:
+                    return Displace.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Exponent:
+                    return Exponent.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Invert:
+                    return Invert.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Max:
+                    return Max.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Min:
+                    return Min.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Multiply:
+                    return Multiply.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Power:
+                    return Power.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Rotate:
+                    return Rotate.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Scale:
+                    return Scale.GetBurstValue(x, y, z, data, dataIndex);
                 case ModuleType.ScaleBias:
                     return ScaleBias.GetBurstValue(x, y, z, data, dataIndex);
                 case ModuleType.Select:
                     return Select.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Subtract:
-                //     return Subtract.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Subtract:
+                    return Subtract.GetBurstValue(x, y, z, data, dataIndex);
                 // case ModuleType.Terrace:
                 //     return Terrace.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Translate:
-                //     return Translate.GetBurstValue(x, y, z, data, dataIndex);
-                // case ModuleType.Turbulence:
-                //     return Turbulence.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Translate:
+                    return Translate.GetBurstValue(x, y, z, data, dataIndex);
+                case ModuleType.Turbulence:
+                    return Turbulence.GetBurstValue(x, y, z, data, dataIndex);
                 default:
                     // Debug.LogError("Not a valid module type");
                     return 0;

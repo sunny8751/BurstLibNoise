@@ -5,10 +5,10 @@ using LibNoise;
 
 namespace BurstLibNoise.Operator
 {
-    public class ScaleBias : LibNoise.Operator.ScaleBias, BurstModuleBase
+    public class Displace : LibNoise.Operator.Displace, BurstModuleBase
     {
         public ModuleData GetData(int[] sources) {
-            return new ModuleData(ModuleType.ScaleBias, sources, (float) Scale, (float) Bias);
+            return new ModuleData(ModuleType.Displace, sources);
         }
 
         // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
@@ -26,39 +26,36 @@ namespace BurstLibNoise.Operator
         public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
             ModuleData moduleData = data[dataIndex];
-            float _scale = moduleData[0];
-            float _bias = moduleData[1];
             
-            return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0)) * _scale + _bias;
+            // Debug.Assert(Modules[0] != null);
+            // Debug.Assert(Modules[1] != null);
+            // Debug.Assert(Modules[2] != null);
+            // Debug.Assert(Modules[3] != null);
+            var dx = x + BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(1));
+            var dy = y + BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(2));
+            var dz = z + BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(3));
+            return BurstModuleManager.GetBurstValue(dx, dy, dz, data, moduleData.Source(0));
         }
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of ScaleBias.
+        /// Initializes a new instance of Displace.
         /// </summary>
-        public ScaleBias()
+        public Displace()
             : base()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of ScaleBias.
+        /// Initializes a new instance of Displace.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public ScaleBias(ModuleBase input)
-            : base(input)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of ScaleBias.
-        /// </summary>
-        /// <param name="scale">The scaling factor to apply to the output value from the source module.</param>
-        /// <param name="bias">The bias to apply to the scaled output value from the source module.</param>
-        /// <param name="input">The input module.</param>
-        public ScaleBias(double scale, double bias, ModuleBase input)
-            : base(scale, bias, input)
+        /// <param name="x">The displacement module of the x-axis.</param>
+        /// <param name="y">The displacement module of the y-axis.</param>
+        /// <param name="z">The displacement module of the z-axis.</param>
+        public Displace(ModuleBase input, ModuleBase x, ModuleBase y, ModuleBase z)
+            : base(input, x, y, z)
         {
         }
 

@@ -5,10 +5,10 @@ using LibNoise;
 
 namespace BurstLibNoise.Operator
 {
-    public class ScaleBias : LibNoise.Operator.ScaleBias, BurstModuleBase
+    public class Scale : LibNoise.Operator.Scale, BurstModuleBase
     {
         public ModuleData GetData(int[] sources) {
-            return new ModuleData(ModuleType.ScaleBias, sources, (float) Scale, (float) Bias);
+            return new ModuleData(ModuleType.Scale, sources, (float) X, (float) Y, (float) Z);
         }
 
         // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
@@ -26,39 +26,42 @@ namespace BurstLibNoise.Operator
         public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
             ModuleData moduleData = data[dataIndex];
-            float _scale = moduleData[0];
-            float _bias = moduleData[1];
+            float _x = moduleData[0];
+            float _y = moduleData[1];
+            float _z = moduleData[2];
             
-            return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0)) * _scale + _bias;
+            // Debug.Assert(Modules[0] != null);
+            return BurstModuleManager.GetBurstValue(x * _x, y * _y, z * _z, data, moduleData.Source(0));
         }
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of ScaleBias.
+        /// Initializes a new instance of Scale.
         /// </summary>
-        public ScaleBias()
+        public Scale()
             : base()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of ScaleBias.
+        /// Initializes a new instance of Scale.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public ScaleBias(ModuleBase input)
+        public Scale(ModuleBase input)
             : base(input)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of ScaleBias.
+        /// Initializes a new instance of Scale.
         /// </summary>
-        /// <param name="scale">The scaling factor to apply to the output value from the source module.</param>
-        /// <param name="bias">The bias to apply to the scaled output value from the source module.</param>
+        /// <param name="x">The scaling on the x-axis.</param>
+        /// <param name="y">The scaling on the y-axis.</param>
+        /// <param name="z">The scaling on the z-axis.</param>
         /// <param name="input">The input module.</param>
-        public ScaleBias(double scale, double bias, ModuleBase input)
-            : base(scale, bias, input)
+        public Scale(double x, double y, double z, ModuleBase input)
+            : base(x, y, z, input)
         {
         }
 

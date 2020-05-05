@@ -2,13 +2,14 @@ using System.Diagnostics;
 using Unity.Collections;
 using BurstLibNoise;
 using LibNoise;
+using Unity.Mathematics;
 
 namespace BurstLibNoise.Operator
 {
-    public class ScaleBias : LibNoise.Operator.ScaleBias, BurstModuleBase
+    public class Min : LibNoise.Operator.Min, BurstModuleBase
     {
         public ModuleData GetData(int[] sources) {
-            return new ModuleData(ModuleType.ScaleBias, sources, (float) Scale, (float) Bias);
+            return new ModuleData(ModuleType.Min, sources);
         }
 
         // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
@@ -26,39 +27,31 @@ namespace BurstLibNoise.Operator
         public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
             ModuleData moduleData = data[dataIndex];
-            float _scale = moduleData[0];
-            float _bias = moduleData[1];
             
-            return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0)) * _scale + _bias;
+            // Debug.Assert(Modules[0] != null);
+            // Debug.Assert(Modules[1] != null);
+            var a = BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0));
+            var b = BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(1));
+            return math.min(a, b);
         }
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of ScaleBias.
+        /// Initializes a new instance of Min.
         /// </summary>
-        public ScaleBias()
+        public Min()
             : base()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of ScaleBias.
+        /// Initializes a new instance of Min.
         /// </summary>
-        /// <param name="input">The input module.</param>
-        public ScaleBias(ModuleBase input)
-            : base(input)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of ScaleBias.
-        /// </summary>
-        /// <param name="scale">The scaling factor to apply to the output value from the source module.</param>
-        /// <param name="bias">The bias to apply to the scaled output value from the source module.</param>
-        /// <param name="input">The input module.</param>
-        public ScaleBias(double scale, double bias, ModuleBase input)
-            : base(scale, bias, input)
+        /// <param name="lhs">The left hand input module.</param>
+        /// <param name="rhs">The right hand input module.</param>
+        public Min(ModuleBase lhs, ModuleBase rhs)
+            : base(lhs, rhs)
         {
         }
 

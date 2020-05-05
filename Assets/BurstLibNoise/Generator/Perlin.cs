@@ -30,19 +30,25 @@ namespace BurstLibNoise.Generator
         public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
             ModuleData moduleData = data[dataIndex];
-            float frequency = moduleData[0];
-            float lacunarity = moduleData[1];
-            float persistence = moduleData[2];
-            int octaves = (int) moduleData[3];
-            int seed = (int) moduleData[4];
+            float _frequency = moduleData[0];
+            float _lacunarity = moduleData[1];
+            float _persistence = moduleData[2];
+            int _octaveCount = (int) moduleData[3];
+            int _seed = (int) moduleData[4];
 
+            return GetBurstValue(x, y, z, _frequency, _lacunarity, _persistence, _octaveCount, _seed);
+        }
+
+        // Special method for Turbulence operator
+        public static float GetBurstValue(float x, float y, float z, float frequency, float lacunarity, float persistence, int octaveCount, int seed)
+        {
             float value       = 0.0f;
             float amplitude   = 1.0f;
 
             x *= frequency;
             y *= frequency;
             z *= frequency;
-            for (var i = 0; i < octaves; i++)
+            for (var i = 0; i < octaveCount; i++)
             {
                 int newSeed = seed + i;
 

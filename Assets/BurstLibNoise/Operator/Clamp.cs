@@ -5,10 +5,14 @@ using LibNoise;
 
 namespace BurstLibNoise.Operator
 {
-    public class ScaleBias : LibNoise.Operator.ScaleBias, BurstModuleBase
+    /// <summary>
+    /// Provides a noise module that clamps the output value from a source module to a
+    /// range of values. [OPERATOR]
+    /// </summary>
+    public class Clamp : LibNoise.Operator.Clamp, BurstModuleBase
     {
         public ModuleData GetData(int[] sources) {
-            return new ModuleData(ModuleType.ScaleBias, sources, (float) Scale, (float) Bias);
+            return new ModuleData(ModuleType.Clamp, sources, (float) Minimum, (float) Maximum);
         }
 
         // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
@@ -26,39 +30,55 @@ namespace BurstLibNoise.Operator
         public static float GetBurstValue(float x, float y, float z, NativeArray<ModuleData> data, int dataIndex)
         {
             ModuleData moduleData = data[dataIndex];
-            float _scale = moduleData[0];
-            float _bias = moduleData[1];
+            float _min = moduleData[0];
+            float _max = moduleData[1];
             
-            return BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0)) * _scale + _bias;
+            // Debug.Assert(Modules[0] != null);
+            if (_min > _max)
+            {
+                var t = _min;
+                _min = _max;
+                _max = t;
+            }
+            var v = BurstModuleManager.GetBurstValue(x, y, z, data, moduleData.Source(0));
+            if (v < _min)
+            {
+                return _min;
+            }
+            if (v > _max)
+            {
+                return _max;
+            }
+            return v;
         }
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of ScaleBias.
+        /// Initializes a new instance of Clamp.
         /// </summary>
-        public ScaleBias()
+        public Clamp()
             : base()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of ScaleBias.
+        /// Initializes a new instance of Clamp.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public ScaleBias(ModuleBase input)
+        public Clamp(ModuleBase input)
             : base(input)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of ScaleBias.
+        /// Initializes a new instance of Clamp.
         /// </summary>
-        /// <param name="scale">The scaling factor to apply to the output value from the source module.</param>
-        /// <param name="bias">The bias to apply to the scaled output value from the source module.</param>
         /// <param name="input">The input module.</param>
-        public ScaleBias(double scale, double bias, ModuleBase input)
-            : base(scale, bias, input)
+        /// <param name="min">The minimum value.</param>
+        /// <param name="max">The maximum value.</param>
+        public Clamp(double min, double max, ModuleBase input)
+            : base(min, max, input)
         {
         }
 

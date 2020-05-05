@@ -40,7 +40,7 @@ namespace BurstLibNoise
 
     public struct ModuleData
     {
-        const int NUM_PARAMS = 5;
+        const int NUM_PARAMS = 6;
 
         public ModuleType type;
         public float param1;
@@ -48,13 +48,14 @@ namespace BurstLibNoise
         public float param3;
         public float param4;
         public float param5;
+        public float param6;
 
         public int source1;
         public int source2;
         public int source3;
         public int source4;
 
-        public ModuleData(ModuleType type, int[] sources, float param1 = 0, float param2 = 0, float param3 = 0, float param4 = 0, float param5 = 0)
+        public ModuleData(ModuleType type, int[] sources, float param1 = 0, float param2 = 0, float param3 = 0, float param4 = 0, float param5 = 0, float param6 = 0)
         {
             this.type = type;
             this.param1 = param1;
@@ -62,6 +63,7 @@ namespace BurstLibNoise
             this.param3 = param3;
             this.param4 = param4;
             this.param5 = param5;
+            this.param6 = param6;
 
             this.source1 = -1;
             this.source2 = -1;
@@ -109,6 +111,7 @@ namespace BurstLibNoise
                     case 2: return param3;
                     case 3: return param4;
                     case 4: return param5;
+                    case 5: return param6;
                     default: throw new System.IndexOutOfRangeException();
                 }
             }
@@ -131,6 +134,9 @@ namespace BurstLibNoise
                         break;
                     case 4:
                         param5 = value;
+                        break;
+                    case 5:
+                        param6 = value;
                         break;
                     default: throw new System.IndexOutOfRangeException();
                 }
