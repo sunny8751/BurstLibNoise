@@ -4,6 +4,8 @@
 
 Added Unity Burst Job support for [LibNoise.Unity](https://github.com/ricardojmendez/LibNoise.Unity).
 
+See the [Example Project](https://github.com/sunny8751/BurstLibNoiseExample).
+
 ### Features
 - ~3x speed boost on my computer using Burst parallel jobs
 - Supports all LibNoise modules except for Cache, Curve, and Terrace
