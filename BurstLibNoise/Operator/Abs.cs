@@ -46,8 +46,8 @@ namespace BurstLibNoise.Operator
         /// Initializes a new instance of Abs.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public Abs(ModuleBase input)
-            : base(input)
+        public Abs(BurstModuleBase input)
+            : base((ModuleBase) input)
         {
         }
 

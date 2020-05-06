@@ -54,8 +54,8 @@ namespace BurstLibNoise.Operator
         /// <param name="x">The displacement module of the x-axis.</param>
         /// <param name="y">The displacement module of the y-axis.</param>
         /// <param name="z">The displacement module of the z-axis.</param>
-        public Displace(ModuleBase input, ModuleBase x, ModuleBase y, ModuleBase z)
-            : base(input, x, y, z)
+        public Displace(BurstModuleBase input, BurstModuleBase x, BurstModuleBase y, BurstModuleBase z)
+            : base((ModuleBase) input, (ModuleBase) x, (ModuleBase) y, (ModuleBase) z)
         {
         }
 

@@ -66,8 +66,8 @@ namespace BurstLibNoise.Operator
         /// Initializes a new instance of Clamp.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public Clamp(ModuleBase input)
-            : base(input)
+        public Clamp(BurstModuleBase input)
+            : base((ModuleBase) input)
         {
         }
 
@@ -77,8 +77,8 @@ namespace BurstLibNoise.Operator
         /// <param name="input">The input module.</param>
         /// <param name="min">The minimum value.</param>
         /// <param name="max">The maximum value.</param>
-        public Clamp(double min, double max, ModuleBase input)
-            : base(min, max, input)
+        public Clamp(double min, double max, BurstModuleBase input)
+            : base(min, max, (ModuleBase) input)
         {
         }
 

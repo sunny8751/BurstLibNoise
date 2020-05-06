@@ -71,8 +71,8 @@ namespace BurstLibNoise.Operator
         /// Initializes a new instance of Turbulence.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public Turbulence(ModuleBase input)
-            : base(input)
+        public Turbulence(BurstModuleBase input)
+            : base((ModuleBase) input)
         {
 
         }
@@ -80,7 +80,7 @@ namespace BurstLibNoise.Operator
         /// <summary>
         /// Initializes a new instance of Turbulence.
         /// </summary>
-        public Turbulence(double power, ModuleBase input)
+        public Turbulence(double power, BurstModuleBase input)
             : this(new Perlin(), new Perlin(), new Perlin(), power, input)
         {
         }
@@ -93,8 +93,8 @@ namespace BurstLibNoise.Operator
         /// <param name="z">The perlin noise to apply on the z-axis.</param>
         /// <param name="power">The power of the turbulence.</param>
         /// <param name="input">The input module.</param>
-        public Turbulence(Perlin x, Perlin y, Perlin z, double power, ModuleBase input)
-            : base(x, y, z, power, input)
+        public Turbulence(Perlin x, Perlin y, Perlin z, double power, BurstModuleBase input)
+            : base(x, y, z, power, (ModuleBase) input)
         {
         }
 

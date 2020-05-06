@@ -48,8 +48,8 @@ namespace BurstLibNoise.Operator
         /// </summary>
         /// <param name="lhs">The left hand input module.</param>
         /// <param name="rhs">The right hand input module.</param>
-        public Add(ModuleBase lhs, ModuleBase rhs)
-            : base(lhs, rhs)
+        public Add(BurstModuleBase lhs, BurstModuleBase rhs)
+            : base((ModuleBase) lhs, (ModuleBase) rhs)
         {
         }
 

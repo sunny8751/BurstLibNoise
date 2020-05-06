@@ -45,8 +45,8 @@ namespace BurstLibNoise.Operator
         /// Initializes a new instance of Invert.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public Invert(ModuleBase input)
-            : base(input)
+        public Invert(BurstModuleBase input)
+            : base((ModuleBase) input)
         {
         }
 

@@ -48,8 +48,8 @@ namespace BurstLibNoise.Operator
         /// Initializes a new instance of Exponent.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public Exponent(ModuleBase input)
-            : base(input)
+        public Exponent(BurstModuleBase input)
+            : base((ModuleBase) input)
         {
         }
 
@@ -58,8 +58,8 @@ namespace BurstLibNoise.Operator
         /// </summary>
         /// <param name="exponent">The exponent to use.</param>
         /// <param name="input">The input module.</param>
-        public Exponent(double exponent, ModuleBase input)
-            : base(exponent, input)
+        public Exponent(double exponent, BurstModuleBase input)
+            : base(exponent, (ModuleBase) input)
         {
         }
 

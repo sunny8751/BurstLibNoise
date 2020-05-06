@@ -15,27 +15,20 @@ namespace BurstLibNoise
     /// </summary>
     public class BurstModuleManager
     {
-        private bool _isCreatingHeightmap = false;
-        private JobHandle jobHandle;
-        private NativeArray<ModuleData> moduleData;
-
-        public void StartPlanarHeightmapGeneration(NativeArray<float> heightmap, BurstModuleBase module, int width, int height, double left, double right, double top, double bottom, bool isSeamless) {
-            StartHeightmapGeneration(heightmap, module, GenerateMode.Planar, width, height, left, right, top, bottom, isSeamless);
+        public static void GeneratePlanarHeightmap(NativeArray<float> heightmap, BurstModuleBase module, int width, int height, double left, double right, double top, double bottom, bool isSeamless) {
+            GenerateHeightmap(heightmap, module, GenerateMode.Planar, width, height, left, right, top, bottom, isSeamless);
         }
 
-        public void StartCylindricalHeightmapGeneration(NativeArray<float> heightmap, BurstModuleBase module, int width, int height, double angleMin, double angleMax, double heightMin, double heightMax) {
-            StartHeightmapGeneration(heightmap, module, GenerateMode.Cylindrical, width, height, angleMin, angleMax, heightMin, heightMax);
+        public static void GenerateCylindricalHeightmap(NativeArray<float> heightmap, BurstModuleBase module, int width, int height, double angleMin, double angleMax, double heightMin, double heightMax) {
+            GenerateHeightmap(heightmap, module, GenerateMode.Cylindrical, width, height, angleMin, angleMax, heightMin, heightMax);
         }
 
-        public void StartSphericalHeightmapGeneration(NativeArray<float> heightmap, BurstModuleBase module, int width, int height, double south, double north, double west, double east) {
-            StartHeightmapGeneration(heightmap, module, GenerateMode.Spherical, width, height, south, north, west, east);
+        public static void GenerateSphericalHeightmap(NativeArray<float> heightmap, BurstModuleBase module, int width, int height, double south, double north, double west, double east) {
+            GenerateHeightmap(heightmap, module, GenerateMode.Spherical, width, height, south, north, west, east);
         }
 
-        private void StartHeightmapGeneration(NativeArray<float> heightmap, BurstModuleBase module, GenerateMode generateMode, int width, int height, double p1, double p2, double p3, double p4, bool p5 = false) {
-            if (_isCreatingHeightmap) {
-                return;
-            }
-             moduleData = CreateModuleData(module);
+        private static void GenerateHeightmap(NativeArray<float> heightmap, BurstModuleBase module, GenerateMode generateMode, int width, int height, double p1, double p2, double p3, double p4, bool p5 = false) {
+            NativeArray<ModuleData> moduleData = CreateModuleData(module);
 
             var job = new GenerateLibNoiseJob
             {
@@ -50,11 +43,7 @@ namespace BurstLibNoise
                 p4 = p4,
                 p5 = p5
             };
-            jobHandle = job.Schedule(heightmap.Length, 256);
-            _isCreatingHeightmap = true;
-        }
-
-        public void CompleteHeightmapGeneration() {
+            JobHandle jobHandle = job.Schedule(heightmap.Length, 256);
             jobHandle.Complete();
 
             // // create texture
@@ -73,10 +62,9 @@ namespace BurstLibNoise
             // GetComponent<Renderer>().material.mainTexture = texture;
 
             moduleData.Dispose();
-            _isCreatingHeightmap = false;
         }
 
-        private NativeArray<ModuleData> CreateModuleData(BurstModuleBase root) {
+        public static NativeArray<ModuleData> CreateModuleData(BurstModuleBase root) {
             List<ModuleData> modules = new List<ModuleData>();
             Queue<BurstModuleBase> queue = new Queue<BurstModuleBase>();
             queue.Enqueue(root);
@@ -89,7 +77,7 @@ namespace BurstLibNoise
                     sourceIndices[i] = modules.Count + i + 1; // add one for the current module
                 }
                 modules.Add(module.GetData(sourceIndices));
-                // Debug.Log(module.GetData(sourceIndices).type);
+                Debug.Log(module.GetData(sourceIndices).type);
             }
 
             NativeArray<ModuleData> moduleData = new NativeArray<ModuleData>(modules.Count, Allocator.Persistent);
@@ -121,7 +109,7 @@ namespace BurstLibNoise
     public enum ModuleType
     {
         Billow, Checker, Const, Cylinders, Perlin, RidgedMultifractal, Spheres, Voronoi,
-        Abs, Add, Blend, Cache, Clamp, Curve, Displace, Exponent, Invert, Max, Min, Multiply, Power, Rotate, Scale, ScaleBias, Select, Subtract, Terrace, Translate, Turbulence
+        Planet, Abs, Add, Blend, Cache, Clamp, Curve, Displace, Exponent, Invert, Max, Min, Multiply, Power, Rotate, Scale, ScaleBias, Select, Subtract, Terrace, Translate, Turbulence
     };
 
     public struct ModuleData

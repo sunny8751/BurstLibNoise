@@ -105,9 +105,7 @@ namespace BurstLibNoise
             {
                 throw new ArgumentNullException("Generator is null");
             }
-            BurstModuleManager manager = new BurstModuleManager();
-            manager.StartPlanarHeightmapGeneration(heightmap, generator, heightmapWidth, heightmapHeight, left, right, top, bottom, isSeamless);
-            manager.CompleteHeightmapGeneration();
+            BurstModuleManager.GeneratePlanarHeightmap(heightmap, generator, heightmapWidth, heightmapHeight, left, right, top, bottom, isSeamless);
             SetData();
         }
 
@@ -128,9 +126,7 @@ namespace BurstLibNoise
             {
                 throw new ArgumentNullException("Generator is null");
             }
-            BurstModuleManager manager = new BurstModuleManager();
-            manager.StartCylindricalHeightmapGeneration(heightmap, generator, heightmapWidth, heightmapHeight, angleMin, angleMax, heightMin, heightMax);
-            manager.CompleteHeightmapGeneration();
+            BurstModuleManager.GenerateCylindricalHeightmap(heightmap, generator, heightmapWidth, heightmapHeight, angleMin, angleMax, heightMin, heightMax);
             SetData();
         }
 
@@ -151,9 +147,7 @@ namespace BurstLibNoise
             {
                 throw new ArgumentNullException("Generator is null");
             }
-            BurstModuleManager manager = new BurstModuleManager();
-            manager.StartSphericalHeightmapGeneration(heightmap, generator, heightmapWidth, heightmapHeight, south, north, west, east);
-            manager.CompleteHeightmapGeneration();
+            BurstModuleManager.GenerateSphericalHeightmap(heightmap, generator, heightmapWidth, heightmapHeight, south, north, west, east);
             SetData();            
         }
 

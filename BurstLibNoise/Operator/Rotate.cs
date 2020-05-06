@@ -69,8 +69,8 @@ namespace BurstLibNoise.Operator
         /// Initializes a new instance of Rotate.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public Rotate(ModuleBase input)
-            : base(input)
+        public Rotate(BurstModuleBase input)
+            : base((ModuleBase) input)
         {
         }
 
@@ -81,8 +81,8 @@ namespace BurstLibNoise.Operator
         /// <param name="y">The rotation around the y-axis.</param>
         /// <param name="z">The rotation around the z-axis.</param>
         /// <param name="input">The input module.</param>
-        public Rotate(double x, double y, double z, ModuleBase input)
-            : base(x, y, z, input)
+        public Rotate(double x, double y, double z, BurstModuleBase input)
+            : base(x, y, z, (ModuleBase) input)
         {
         }
 

@@ -88,8 +88,8 @@ namespace BurstLibNoise.Operator
         /// <param name="inputA">The first input module.</param>
         /// <param name="inputB">The second input module.</param>
         /// <param name="controller">The controller module.</param>
-        public Select(ModuleBase inputA, ModuleBase inputB, ModuleBase controller)
-            : base(inputA, inputB, controller)
+        public Select(BurstModuleBase inputA, BurstModuleBase inputB, BurstModuleBase controller)
+            : base((ModuleBase) inputA, (ModuleBase) inputB, (ModuleBase) controller)
         {
         }
 
@@ -101,8 +101,8 @@ namespace BurstLibNoise.Operator
         /// <param name="fallOff">The falloff value at the edge transition.</param>
         /// <param name="inputA">The first input module.</param>
         /// <param name="inputB">The second input module.</param>
-        public Select(double min, double max, double fallOff, ModuleBase inputA, ModuleBase inputB)
-            : base(min, max, fallOff, inputA, inputB)
+        public Select(double min, double max, double fallOff, BurstModuleBase inputA, BurstModuleBase inputB)
+            : base(min, max, fallOff, (ModuleBase) inputA, (ModuleBase) inputB)
         {
         }
 

@@ -60,8 +60,8 @@ namespace BurstLibNoise.Operator
         /// <param name="y">The scaling on the y-axis.</param>
         /// <param name="z">The scaling on the z-axis.</param>
         /// <param name="input">The input module.</param>
-        public Scale(double x, double y, double z, ModuleBase input)
-            : base(x, y, z, input)
+        public Scale(double x, double y, double z, BurstModuleBase input)
+            : base(x, y, z, (ModuleBase) input)
         {
         }
 

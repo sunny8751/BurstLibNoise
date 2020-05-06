@@ -48,8 +48,8 @@ namespace BurstLibNoise.Operator
         /// Initializes a new instance of Translate.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public Translate(ModuleBase input)
-            : base(input)
+        public Translate(BurstModuleBase input)
+            : base((ModuleBase) input)
         {
         }
 
@@ -60,8 +60,8 @@ namespace BurstLibNoise.Operator
         /// <param name="y">The translation on the y-axis.</param>
         /// <param name="z">The translation on the z-axis.</param>
         /// <param name="input">The input module.</param>
-        public Translate(double x, double y, double z, ModuleBase input)
-            : base(x, y, z, input)
+        public Translate(double x, double y, double z, BurstModuleBase input)
+            : base(x, y, z, (ModuleBase) input)
         {
         }
 

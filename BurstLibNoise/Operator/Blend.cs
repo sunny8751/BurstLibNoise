@@ -52,8 +52,8 @@ namespace BurstLibNoise.Operator
         /// <param name="lhs">The left hand input module.</param>
         /// <param name="rhs">The right hand input module.</param>
         /// <param name="controller">The controller of the operator.</param>
-        public Blend(ModuleBase lhs, ModuleBase rhs, ModuleBase controller)
-            : base(lhs, rhs, controller)
+        public Blend(BurstModuleBase lhs, BurstModuleBase rhs, BurstModuleBase controller)
+            : base((ModuleBase) lhs, (ModuleBase) rhs, (ModuleBase) controller)
         {
         }
 

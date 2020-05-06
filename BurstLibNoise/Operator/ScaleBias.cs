@@ -46,8 +46,8 @@ namespace BurstLibNoise.Operator
         /// Initializes a new instance of ScaleBias.
         /// </summary>
         /// <param name="input">The input module.</param>
-        public ScaleBias(ModuleBase input)
-            : base(input)
+        public ScaleBias(BurstModuleBase input)
+            : base((ModuleBase) input)
         {
         }
 
@@ -57,8 +57,8 @@ namespace BurstLibNoise.Operator
         /// <param name="scale">The scaling factor to apply to the output value from the source module.</param>
         /// <param name="bias">The bias to apply to the scaled output value from the source module.</param>
         /// <param name="input">The input module.</param>
-        public ScaleBias(double scale, double bias, ModuleBase input)
-            : base(scale, bias, input)
+        public ScaleBias(double scale, double bias, BurstModuleBase input)
+            : base(scale, bias, (ModuleBase) input)
         {
         }
 
