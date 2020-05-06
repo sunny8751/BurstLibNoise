@@ -5,17 +5,79 @@ using System.Reflection;
 using UnityEngine;
 using Unity.Burst;
 using Unity.Collections;
-using BurstLibNoise;
-using BurstLibNoise.Generator;
-using BurstLibNoise.Operator;
+using LibNoise;
+using Unity.Jobs;
 
 namespace BurstLibNoise
 {
     /// <summary>
     /// Base class for noise modules.
     /// </summary>
-    public static class BurstModuleManager
+    public class BurstModuleManager
     {
+        public void GenerateHeightmap(NativeArray<float> heightmap, BurstModuleBase module, GenerateMode generateMode, int width, int height, double p1, double p2, double p3, double p4, bool p5 = false) {
+            List<ModuleData> modules = GetModuleData(module);
+
+            // TODO replace with unsafe mem copy
+            NativeArray<ModuleData> moduleData = new NativeArray<ModuleData>(modules.Count, Allocator.Persistent);
+            for (int i = 0; i < modules.Count; i++) {
+                moduleData[i] = modules[i];
+            }
+
+            var job = new GenerateLibNoiseJob
+            {
+                moduleData = moduleData,
+                heightmap = heightmap,
+                width = width,
+                height = height,
+                generateMode = generateMode,
+                p1 = p1,
+                p2 = p2,
+                p3 = p3,
+                p4 = p4,
+                p5 = p5
+            };
+            JobHandle jobHandle = job.Schedule(heightmap.Length, 256);
+
+            jobHandle.Complete();
+
+            // // create texture
+            // Texture2D texture = new Texture2D(Width, Height);
+            // float[] heightmapValues = heightmap.ToArray();
+            // Color[] colors = new Color[heightmapValues.Length];
+            // for (int i = 0; i < heightmapValues.Length; i++) {
+            //     float value = heightmapValues[i];
+            //     value = (value + 1) / 2;
+            //     colors[i] = new Color(value, value, value, 1);
+            // }
+            // // Debug.Log(colors[0]);
+            // // Debug.Log(colors[5]);
+            // texture.SetPixels(colors);
+            // texture.wrapMode = TextureWrapMode.Clamp;
+            // texture.Apply();
+
+            // GetComponent<Renderer>().material.mainTexture = texture;
+
+            moduleData.Dispose();
+        }
+
+        private List<ModuleData> GetModuleData(BurstModuleBase root) {
+            List<ModuleData> modules = new List<ModuleData>();
+            Queue<BurstModuleBase> queue = new Queue<BurstModuleBase>();
+            queue.Enqueue(root);
+
+            while (queue.Count > 0) {
+                BurstModuleBase module = queue.Dequeue();
+                int[] sourceIndices = new int[((ModuleBase) module).SourceModuleCount];
+                for (int i = 0; i < sourceIndices.Length; i++) {
+                    queue.Enqueue(module.Source(i));
+                    sourceIndices[i] = modules.Count + i + 1; // add one for the current module
+                }
+                modules.Add(module.GetData(sourceIndices));
+                // Debug.Log(module.GetData(sourceIndices).type);
+            }
+            return modules;
+        }
 
         /// <summary>
         /// Returns the output value for the given input coordinates.
@@ -29,8 +91,11 @@ namespace BurstLibNoise
             ModuleType type = data[dataIndex].type;
             return StaticMapper.GetBurstValue(type, x, y, z, data, dataIndex);
         }
-
     }
+
+    public enum GenerateMode {
+        Planar, Cylindrical, Spherical
+    };
 
     public enum ModuleType
     {

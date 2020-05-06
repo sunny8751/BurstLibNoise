@@ -41,6 +41,7 @@ public class LibNoiseTest : MonoBehaviour
 		var heightMapBuilder = new Noise2D(Width, Height, generator);
         heightMapBuilder.GeneratePlanar(Noise2D.Left, Noise2D.Right, Noise2D.Top, Noise2D.Bottom);
 		// heightMapBuilder.GenerateSpherical(90, -90, -180, 180);
+        // heightMapBuilder.GenerateCylindrical(-180, 180, -1, 1);
 		var image = heightMapBuilder.GetTexture();
 		GetComponent<Renderer>().material.mainTexture = image;
 	}
