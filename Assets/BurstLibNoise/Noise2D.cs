@@ -78,7 +78,7 @@ namespace BurstLibNoise
         /// Clears the noise map.
         /// </summary>
         /// <param name="value">The constant value to clear the noise map with.</param>
-        public void Clear(float value = 0f)
+        public new void Clear(float value = 0f)
         {
             base.Clear(value);
             for (var i = 0; i < heightmap.Length; i++)
@@ -95,7 +95,7 @@ namespace BurstLibNoise
         /// <param name="top">The clip region to the top.</param>
         /// <param name="bottom">The clip region to the bottom.</param>
         /// <param name="isSeamless">Indicates whether the resulting noise map should be seamless.</param>
-        public void GeneratePlanar(double left, double right, double top, double bottom, bool isSeamless = true)
+        public new void GeneratePlanar(double left, double right, double top, double bottom, bool isSeamless = true)
         {
             if (right <= left || bottom <= top)
             {
@@ -105,7 +105,9 @@ namespace BurstLibNoise
             {
                 throw new ArgumentNullException("Generator is null");
             }
-            new BurstModuleManager().GenerateHeightmap(heightmap, generator, GenerateMode.Planar, heightmapWidth, heightmapHeight, left, right, top, bottom, isSeamless);
+            BurstModuleManager manager = new BurstModuleManager();
+            manager.StartPlanarHeightmapGeneration(heightmap, generator, heightmapWidth, heightmapHeight, left, right, top, bottom, isSeamless);
+            manager.CompleteHeightmapGeneration();
             SetData();
         }
 
@@ -116,7 +118,7 @@ namespace BurstLibNoise
         /// <param name="angleMax">The minimum angle of the clip region.</param>
         /// <param name="heightMin">The minimum height of the clip region.</param>
         /// <param name="heightMax">The maximum height of the clip region.</param>
-        public void GenerateCylindrical(double angleMin, double angleMax, double heightMin, double heightMax)
+        public new void GenerateCylindrical(double angleMin, double angleMax, double heightMin, double heightMax)
         {
             if (angleMax <= angleMin || heightMax <= heightMin)
             {
@@ -126,7 +128,9 @@ namespace BurstLibNoise
             {
                 throw new ArgumentNullException("Generator is null");
             }
-            new BurstModuleManager().GenerateHeightmap(heightmap, generator, GenerateMode.Cylindrical, heightmapWidth, heightmapHeight, angleMin, angleMax, heightMin, heightMax);
+            BurstModuleManager manager = new BurstModuleManager();
+            manager.StartCylindricalHeightmapGeneration(heightmap, generator, heightmapWidth, heightmapHeight, angleMin, angleMax, heightMin, heightMax);
+            manager.CompleteHeightmapGeneration();
             SetData();
         }
 
@@ -137,7 +141,7 @@ namespace BurstLibNoise
         /// <param name="north">The clip region to the north.</param>
         /// <param name="west">The clip region to the west.</param>
         /// <param name="east">The clip region to the east.</param>
-        public void GenerateSpherical(double south, double north, double west, double east)
+        public new void GenerateSpherical(double south, double north, double west, double east)
         {
             if (east <= west || south <= north)
             {
@@ -147,7 +151,9 @@ namespace BurstLibNoise
             {
                 throw new ArgumentNullException("Generator is null");
             }
-            new BurstModuleManager().GenerateHeightmap(heightmap, generator, GenerateMode.Spherical, heightmapWidth, heightmapHeight, south, north, west, east);
+            BurstModuleManager manager = new BurstModuleManager();
+            manager.StartSphericalHeightmapGeneration(heightmap, generator, heightmapWidth, heightmapHeight, south, north, west, east);
+            manager.CompleteHeightmapGeneration();
             SetData();            
         }
 
@@ -171,7 +177,7 @@ namespace BurstLibNoise
         /// <summary>
         /// Immediately releases the unmanaged resources used by this object.
         /// </summary>
-        public void Dispose()
+        public new void Dispose()
         {
             heightmap.Dispose();
         }

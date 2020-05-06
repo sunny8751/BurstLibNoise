@@ -15,14 +15,27 @@ namespace BurstLibNoise
     /// </summary>
     public class BurstModuleManager
     {
-        public void GenerateHeightmap(NativeArray<float> heightmap, BurstModuleBase module, GenerateMode generateMode, int width, int height, double p1, double p2, double p3, double p4, bool p5 = false) {
-            List<ModuleData> modules = GetModuleData(module);
+        private bool _isCreatingHeightmap = false;
+        private JobHandle jobHandle;
+        private NativeArray<ModuleData> moduleData;
 
-            // TODO replace with unsafe mem copy
-            NativeArray<ModuleData> moduleData = new NativeArray<ModuleData>(modules.Count, Allocator.Persistent);
-            for (int i = 0; i < modules.Count; i++) {
-                moduleData[i] = modules[i];
+        public void StartPlanarHeightmapGeneration(NativeArray<float> heightmap, BurstModuleBase module, int width, int height, double left, double right, double top, double bottom, bool isSeamless) {
+            StartHeightmapGeneration(heightmap, module, GenerateMode.Planar, width, height, left, right, top, bottom, isSeamless);
+        }
+
+        public void StartCylindricalHeightmapGeneration(NativeArray<float> heightmap, BurstModuleBase module, int width, int height, double angleMin, double angleMax, double heightMin, double heightMax) {
+            StartHeightmapGeneration(heightmap, module, GenerateMode.Cylindrical, width, height, angleMin, angleMax, heightMin, heightMax);
+        }
+
+        public void StartSphericalHeightmapGeneration(NativeArray<float> heightmap, BurstModuleBase module, int width, int height, double south, double north, double west, double east) {
+            StartHeightmapGeneration(heightmap, module, GenerateMode.Spherical, width, height, south, north, west, east);
+        }
+
+        private void StartHeightmapGeneration(NativeArray<float> heightmap, BurstModuleBase module, GenerateMode generateMode, int width, int height, double p1, double p2, double p3, double p4, bool p5 = false) {
+            if (_isCreatingHeightmap) {
+                return;
             }
+             moduleData = CreateModuleData(module);
 
             var job = new GenerateLibNoiseJob
             {
@@ -37,8 +50,11 @@ namespace BurstLibNoise
                 p4 = p4,
                 p5 = p5
             };
-            JobHandle jobHandle = job.Schedule(heightmap.Length, 256);
+            jobHandle = job.Schedule(heightmap.Length, 256);
+            _isCreatingHeightmap = true;
+        }
 
+        public void CompleteHeightmapGeneration() {
             jobHandle.Complete();
 
             // // create texture
@@ -50,8 +66,6 @@ namespace BurstLibNoise
             //     value = (value + 1) / 2;
             //     colors[i] = new Color(value, value, value, 1);
             // }
-            // // Debug.Log(colors[0]);
-            // // Debug.Log(colors[5]);
             // texture.SetPixels(colors);
             // texture.wrapMode = TextureWrapMode.Clamp;
             // texture.Apply();
@@ -59,9 +73,10 @@ namespace BurstLibNoise
             // GetComponent<Renderer>().material.mainTexture = texture;
 
             moduleData.Dispose();
+            _isCreatingHeightmap = false;
         }
 
-        private List<ModuleData> GetModuleData(BurstModuleBase root) {
+        private NativeArray<ModuleData> CreateModuleData(BurstModuleBase root) {
             List<ModuleData> modules = new List<ModuleData>();
             Queue<BurstModuleBase> queue = new Queue<BurstModuleBase>();
             queue.Enqueue(root);
@@ -76,7 +91,13 @@ namespace BurstLibNoise
                 modules.Add(module.GetData(sourceIndices));
                 // Debug.Log(module.GetData(sourceIndices).type);
             }
-            return modules;
+
+            NativeArray<ModuleData> moduleData = new NativeArray<ModuleData>(modules.Count, Allocator.Persistent);
+            // TODO replace with unsafe mem copy
+            for (int i = 0; i < modules.Count; i++) {
+                moduleData[i] = modules[i];
+            }
+            return moduleData;
         }
 
         /// <summary>

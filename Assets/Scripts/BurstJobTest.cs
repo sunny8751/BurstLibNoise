@@ -47,8 +47,4 @@ public class BurstJobTest : MonoBehaviour
 
         heightMapBuilder.Dispose();
 	}
-
-    private int Seed(System.Random random) {
-        return random.Next();
-    }
 }
