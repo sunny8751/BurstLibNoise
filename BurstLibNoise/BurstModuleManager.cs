@@ -77,7 +77,7 @@ namespace BurstLibNoise
                     sourceIndices[i] = modules.Count + i + 1; // add one for the current module
                 }
                 modules.Add(module.GetData(sourceIndices));
-                Debug.Log(module.GetData(sourceIndices).type);
+                // Debug.Log(module.GetData(sourceIndices).type);
             }
 
             NativeArray<ModuleData> moduleData = new NativeArray<ModuleData>(modules.Count, Allocator.Persistent);

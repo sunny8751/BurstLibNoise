@@ -88,6 +88,17 @@ namespace BurstLibNoise.Operator
         /// <summary>
         /// Initializes a new instance of Turbulence.
         /// </summary>
+        public Turbulence(double power, float frequency, int roughness, int seed, BurstModuleBase input)
+            : this(new Perlin(), new Perlin(), new Perlin(), power, input)
+        {
+            Frequency = frequency;
+            Roughness = roughness;
+            Seed = seed;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of Turbulence.
+        /// </summary>
         /// <param name="x">The perlin noise to apply on the x-axis.</param>
         /// <param name="y">The perlin noise to apply on the y-axis.</param>
         /// <param name="z">The perlin noise to apply on the z-axis.</param>
