@@ -1,3 +1,11 @@
 [submodule "Assets/LibNoise"]
 	path = Assets/LibNoise
 	url = https://github.com/ricardojmendez/LibNoise.Unity.git
+[submodule "UndoPro"]
+	path = UndoPro
+	url = https://github.com/Seneral/UndoPro.git
+	branch = lts-1
+[submodule "Node_Editor_Framework"]
+	path = Node_Editor_Framework
+	url = https://github.com/Seneral/Node_Editor_Framework.git
+	branch = release-pkg
