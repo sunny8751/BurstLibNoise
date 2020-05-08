@@ -19,6 +19,7 @@ namespace BurstLibNoise
         #region Fields
 
         private BurstModuleBase generator;
+        private NoiseSettings noiseSettings;
         private NativeArray<float> heightmap;
         
         private readonly int heightmapWidth;
@@ -41,7 +42,7 @@ namespace BurstLibNoise
         /// </summary>
         /// <param name="size">The width and height of the noise map.</param>
         public Noise2D(int size)
-            : base(size, size, null)
+            : this(size, size, (BurstModuleBase) null)
         {
         }
 
@@ -70,6 +71,18 @@ namespace BurstLibNoise
             this.heightmap = new NativeArray<float>(heightmapWidth * heightmapHeight, Allocator.Persistent);
         }
 
+        /// <summary>
+        /// Initializes a new instance of Noise2D.
+        /// </summary>
+        /// <param name="width">The width of the noise map.</param>
+        /// <param name="height">The height of the noise map.</param>
+        /// <param name="generator">The generator module.</param>
+        public Noise2D(int width, int height, NoiseSettings noiseSettings)
+            : this(width, height)
+        {
+            this.noiseSettings = noiseSettings;
+        }
+        
         #endregion
 
         #region Methods
@@ -101,11 +114,14 @@ namespace BurstLibNoise
             {
                 throw new ArgumentException("Invalid right/left or bottom/top combination");
             }
-            if (generator == null)
+            if (generator == null && noiseSettings == null)
             {
-                throw new ArgumentNullException("Generator is null");
+                throw new ArgumentNullException("Both Generator and NoiseSettings are null");
+            } else if (generator == null) {
+                BurstModuleManager.GeneratePlanarHeightmap(heightmap, noiseSettings, heightmapWidth, heightmapHeight, left, right, top, bottom, isSeamless);
+            } else {
+                BurstModuleManager.GeneratePlanarHeightmap(heightmap, generator, heightmapWidth, heightmapHeight, left, right, top, bottom, isSeamless);
             }
-            BurstModuleManager.GeneratePlanarHeightmap(heightmap, generator, heightmapWidth, heightmapHeight, left, right, top, bottom, isSeamless);
             SetData();
         }
 
@@ -122,11 +138,14 @@ namespace BurstLibNoise
             {
                 throw new ArgumentException("Invalid angle or height parameters");
             }
-            if (generator == null)
+            if (generator == null && noiseSettings == null)
             {
-                throw new ArgumentNullException("Generator is null");
+                throw new ArgumentNullException("Both Generator and NoiseSettings are null");
+            } else if (generator == null) {
+                BurstModuleManager.GenerateCylindricalHeightmap(heightmap, noiseSettings, heightmapWidth, heightmapHeight, angleMin, angleMax, heightMin, heightMax);
+            } else {
+                BurstModuleManager.GenerateCylindricalHeightmap(heightmap, generator, heightmapWidth, heightmapHeight, angleMin, angleMax, heightMin, heightMax);
             }
-            BurstModuleManager.GenerateCylindricalHeightmap(heightmap, generator, heightmapWidth, heightmapHeight, angleMin, angleMax, heightMin, heightMax);
             SetData();
         }
 
@@ -143,11 +162,14 @@ namespace BurstLibNoise
             {
                 throw new ArgumentException("Invalid east/west or north/south combination");
             }
-            if (generator == null)
+            if (generator == null && noiseSettings == null)
             {
-                throw new ArgumentNullException("Generator is null");
+                throw new ArgumentNullException("Both Generator and NoiseSettings are null");
+            } else if (generator == null) {
+                BurstModuleManager.GenerateSphericalHeightmap(heightmap, noiseSettings, heightmapWidth, heightmapHeight, south, north, west, east);
+            } else {
+                BurstModuleManager.GenerateSphericalHeightmap(heightmap, generator, heightmapWidth, heightmapHeight, south, north, west, east);
             }
-            BurstModuleManager.GenerateSphericalHeightmap(heightmap, generator, heightmapWidth, heightmapHeight, south, north, west, east);
             SetData();            
         }
 

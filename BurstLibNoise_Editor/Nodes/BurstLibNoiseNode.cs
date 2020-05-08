@@ -57,7 +57,7 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 
 		protected Texture2D GenerateTex(BurstModuleBase module) {
 			Noise2D heightMapBuilder = new Noise2D(width, height, module);
-			heightMapBuilder.GeneratePlanar(4, 10, 1, 5);
+			heightMapBuilder.GeneratePlanar(-1, 1, -1, 1);
 			Texture2D heightMap = heightMapBuilder.GetTexture();
 			heightMapBuilder.Dispose();
 			return heightMap;

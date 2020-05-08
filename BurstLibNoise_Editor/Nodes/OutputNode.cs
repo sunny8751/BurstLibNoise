@@ -4,6 +4,7 @@ using BurstLibNoise.Operator;
 using NodeEditorFramework.Utilities;
 using UnityEditor;
 using Unity.Collections;
+using UnityEngine.Windows;
 
 namespace NodeEditorFramework.BurstLibNoiseEditor
 {
@@ -52,12 +53,21 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 		}
 
 		private void SaveModule(BurstModuleBase moduleBase, string name) {
-			NoiseSettings noiseSettings = (NoiseSettings) ScriptableObject.CreateInstance("NoiseSettings");
+			string assetPath = NOISE_SETTINGS_SAVE_FOLDER + name.Replace(" ", "") + ".asset";
+
+			NoiseSettings noiseSettings;
+			if (File.Exists(assetPath)) {
+				noiseSettings = (NoiseSettings) AssetDatabase.LoadAssetAtPath(assetPath, typeof(NoiseSettings));
+			} else {
+				noiseSettings = (NoiseSettings) ScriptableObject.CreateInstance("NoiseSettings");
+				AssetDatabase.CreateAsset (noiseSettings, assetPath);
+			}
+			
 			NativeArray<ModuleData> data = BurstModuleManager.CreateModuleData(moduleBase);
 			noiseSettings.moduleData = data.ToArray();
 			data.Dispose();
-			AssetDatabase.CreateAsset (noiseSettings, NOISE_SETTINGS_SAVE_FOLDER + name.Replace(" ", "") + ".asset");
-        	AssetDatabase.SaveAssets ();
+			
+			AssetDatabase.SaveAssets ();
 		}
 	}
 }
