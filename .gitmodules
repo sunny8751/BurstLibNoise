@@ -1,5 +1,5 @@
-[submodule "Assets/LibNoise"]
-	path = Assets/LibNoise
+[submodule "LibNoise"]
+	path = LibNoise
 	url = https://github.com/ricardojmendez/LibNoise.Unity.git
 [submodule "UndoPro"]
 	path = UndoPro
