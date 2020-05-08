@@ -10,7 +10,7 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 	[Node(false, "Output")]
 	public class OutputNode : BurstLibNoiseNode
 	{
-		private const string NOISE_SETTINGS_SAVE_FOLDER = "Assets/Resources/NoiseSettings/";
+		private const string NOISE_SETTINGS_SAVE_FOLDER = "Assets/BurstLibNoise/BurstLibNoise/NoiseSettings/";
 
 		public const string ID = "outputNode";
 		public override string GetID { get { return ID; } }
@@ -52,7 +52,7 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 		}
 
 		private void SaveModule(BurstModuleBase moduleBase, string name) {
-			NoiseSettings noiseSettings = new NoiseSettings();
+			NoiseSettings noiseSettings = (NoiseSettings) ScriptableObject.CreateInstance("NoiseSettings");
 			NativeArray<ModuleData> data = BurstModuleManager.CreateModuleData(moduleBase);
 			noiseSettings.moduleData = data.ToArray();
 			data.Dispose();
