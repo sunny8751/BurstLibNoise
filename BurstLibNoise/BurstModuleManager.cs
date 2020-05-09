@@ -64,25 +64,30 @@ namespace BurstLibNoise
             moduleData.Dispose();
         }
 
-        public static NativeArray<ModuleData> CreateModuleData(BurstModuleBase root) {
-            List<ModuleData> modules = new List<ModuleData>();
-            Queue<BurstModuleBase> queue = new Queue<BurstModuleBase>();
-            queue.Enqueue(root);
-
-            while (queue.Count > 0) {
-                BurstModuleBase module = queue.Dequeue();
-                int[] sourceIndices = new int[((ModuleBase) module).SourceModuleCount];
-                for (int i = 0; i < sourceIndices.Length; i++) {
-                    queue.Enqueue(module.Source(i));
-                    sourceIndices[i] = modules.Count + i + 1; // add one for the current module
-                }
-                modules.Add(module.GetData(sourceIndices));
-                // Debug.Log(module.GetData(sourceIndices).type);
+        private static int CreateModuleDataHelper(List<ModuleData> modules, BurstModuleBase module) {
+            if (module == null) {
+                return -1;
             }
+            modules.Add(new ModuleData(0, new int[]{}));
+            int index = modules.Count - 1;
+            int[] sources = new int[((ModuleBase) module).SourceModuleCount];
+            for (int i = 0; i < sources.Length; i++) {
+                sources[i] = CreateModuleDataHelper(modules, module.Source(i)); // add one for the current module
+            }
+            modules[index] = module.GetData(sources);
+            return index;
+        }
 
-            NativeArray<ModuleData> moduleData = new NativeArray<ModuleData>(modules.Count, Allocator.Persistent);
+        public static NativeArray<ModuleData> CreateModuleData(BurstModuleBase module) {
+            List<ModuleData> modules = new List<ModuleData>();
+            CreateModuleDataHelper(modules, module);
+            return Array2NativeArray(modules.ToArray());
+        }
+
+        private static NativeArray<ModuleData> Array2NativeArray(ModuleData[] modules) {
+            NativeArray<ModuleData> moduleData = new NativeArray<ModuleData>(modules.Length, Allocator.Persistent);
             // TODO replace with unsafe mem copy
-            for (int i = 0; i < modules.Count; i++) {
+            for (int i = 0; i < modules.Length; i++) {
                 moduleData[i] = modules[i];
             }
             return moduleData;
