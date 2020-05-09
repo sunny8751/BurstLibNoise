@@ -134,7 +134,7 @@ namespace BurstLibNoise
     public enum ModuleType
     {
         Billow, Checker, Const, Cylinders, Perlin, RidgedMultifractal, Spheres, Voronoi,
-        Planet, Abs, Add, Blend, Cache, Clamp, Curve, Displace, Exponent, Invert, Max, Min, Multiply, Power, Rotate, Scale, ScaleBias, Select, Subtract, Terrace, Translate, Turbulence
+        Abs, Add, Blend, Cache, Clamp, Curve, Displace, Exponent, Invert, Max, Min, Multiply, Power, Rotate, Scale, ScaleBias, Select, Subtract, Terrace, Translate, Turbulence
     };
 
     [System.Serializable]
