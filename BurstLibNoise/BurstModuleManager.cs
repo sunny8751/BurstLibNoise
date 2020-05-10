@@ -80,7 +80,14 @@ namespace BurstLibNoise
             moduleData.Dispose();
         }
 
+        public static NativeArray<ModuleData> CreateModuleData(BurstModuleBase module) {
+            List<ModuleData> modules = new List<ModuleData>();
+            CreateModuleDataHelper(modules, module);
+            return Array2NativeArray(modules.ToArray());
+        }
+
         private static int CreateModuleDataHelper(List<ModuleData> modules, BurstModuleBase module) {
+            // Add with pre-order DFS
             if (module == null) {
                 return -1;
             }
@@ -94,17 +101,15 @@ namespace BurstLibNoise
             return index;
         }
 
-        public static NativeArray<ModuleData> CreateModuleData(BurstModuleBase module) {
-            List<ModuleData> modules = new List<ModuleData>();
-            CreateModuleDataHelper(modules, module);
-            return Array2NativeArray(modules.ToArray());
+        public static BurstModuleBase ParseModuleData(ModuleData[] moduleData) {
+            return StaticMapper.ParseModuleData(moduleData, ref moduleData[0]);
         }
 
         public static NativeArray<ModuleData> CreateModuleData(NoiseSettings noiseSettings) {
             return Array2NativeArray(noiseSettings.moduleData);
         }
 
-        private static NativeArray<ModuleData> Array2NativeArray(ModuleData[] modules) {
+        public static NativeArray<ModuleData> Array2NativeArray(ModuleData[] modules) {
             NativeArray<ModuleData> moduleData = new NativeArray<ModuleData>(modules.Length, Allocator.Persistent);
             // TODO replace with unsafe mem copy
             for (int i = 0; i < modules.Length; i++) {

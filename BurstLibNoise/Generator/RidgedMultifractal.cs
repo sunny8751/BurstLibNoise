@@ -16,6 +16,10 @@ namespace BurstLibNoise.Generator
             return new ModuleData(ModuleType.RidgedMultifractal, sources, (float) Frequency, (float) Lacunarity, OctaveCount, Seed);
         }
 
+        public static BurstModuleBase ParseData(ModuleData[] moduleData, ref ModuleData data) {
+            return new RidgedMultifractal(data[0], data[1], (int) data[2], (int) data[3], QualityMode.Medium);
+        }
+
         // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
         public BurstModuleBase Source(int i) {
             return (BurstModuleBase) Modules[i];

@@ -13,6 +13,7 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 		public override string GetID { get { return ID; } }
 
 		public override string Title { get { return "Select"; } }
+		public override Vector2 DefaultSize { get { return new Vector2(120, 260); } }
 		
 		[ValueConnectionKnob("", Direction.In, "BurstModuleBase")]
 		public ValueConnectionKnob inputModule1Knob;
@@ -24,6 +25,10 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 		[ValueConnectionKnob("", Direction.Out, "BurstModuleBase")]
 		public ValueConnectionKnob outputModuleKnob;
 
+		public float minimum = -1;
+		public float maximum = 1;
+		public float fallOff = 0;
+
 		public override void BurstLibNoiseNodeGUI()
 		{
             inputModule1Knob.DisplayLayout();
@@ -32,6 +37,10 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 			outputModuleKnob.DisplayLayout();
 
 			DrawTexture();
+
+			minimum = EditorGUILayout.FloatField("Minimum", minimum);
+			maximum = EditorGUILayout.FloatField("Maximum", maximum);
+			fallOff = EditorGUILayout.FloatField("FallOff", fallOff);
 		}
 
 		public override bool Calculate()
@@ -41,6 +50,9 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
             BurstModuleBase inputModule3 = inputModule3Knob.connected() ? inputModule3Knob.GetValue<BurstModuleBase>() : null;
             if (inputModule1 != null && inputModule2 != null && inputModule3 != null) {
                 Select module = new Select(inputModule1, inputModule2, inputModule3);
+				module.Minimum = minimum;
+				module.Maximum = maximum;
+				module.FallOff = fallOff;
                 outputModuleKnob.SetValue(module);
     			tex = GenerateTex(module);
             } else {

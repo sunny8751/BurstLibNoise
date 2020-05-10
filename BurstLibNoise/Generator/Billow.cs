@@ -12,6 +12,10 @@ namespace BurstLibNoise.Generator
             return new ModuleData(ModuleType.Billow, sources, (float) Frequency, (float) Lacunarity, (float) Persistence, OctaveCount, Seed);
         }
 
+        public static BurstModuleBase ParseData(ModuleData[] moduleData, ref ModuleData data) {
+            return new Billow(data[0], data[1], data[2], (int) data[3], (int) data[4], QualityMode.Medium);
+        }
+
         // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
         public BurstModuleBase Source(int i) {
             return (BurstModuleBase) Modules[i];

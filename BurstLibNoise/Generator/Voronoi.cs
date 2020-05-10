@@ -12,6 +12,10 @@ namespace BurstLibNoise.Generator
             return new ModuleData(ModuleType.Voronoi, sources, (float) Frequency, (float) Displacement, Seed, UseDistance ? 1 : 0);
         }
 
+        public static BurstModuleBase ParseData(ModuleData[] moduleData, ref ModuleData data) {
+            return new Voronoi(data[0], data[1], (int) data[2], ((int) data[3]) == 1);
+        }
+
         // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
         public BurstModuleBase Source(int i) {
             return (BurstModuleBase) Modules[i];

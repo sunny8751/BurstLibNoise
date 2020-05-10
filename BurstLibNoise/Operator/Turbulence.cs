@@ -14,6 +14,11 @@ namespace BurstLibNoise.Operator
             return new ModuleData(ModuleType.Turbulence, sources, (float) Power, (float) Frequency, _lacunarity, _persistence, (int) Roughness, (int) Seed);
         }
 
+        public static BurstModuleBase ParseData(ModuleData[] moduleData, ref ModuleData data) {
+            return new Turbulence(data[0], data[1], (int) data[4], (int) data[5],
+                StaticMapper.ParseModuleData(moduleData, ref moduleData[data.source1]));
+        }
+
         // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
         public BurstModuleBase Source(int i) {
             return (BurstModuleBase) Modules[i];

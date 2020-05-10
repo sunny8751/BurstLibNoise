@@ -1,0 +1,395 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7908206687617785955
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -3059584454766838271}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 6561558099808003051}
+  side: 2
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &-6822885855971615606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -2900568388099485322}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 2456462459600119920}
+  side: 2
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-3059584454766838271
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347819df58476410cb5519dd1104d365, type: 3}
+  m_Name: ScaleBias
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -151.5, y: -99}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  width: 100
+  height: 100
+  defaultTex: {fileID: 0}
+  inputModuleKnob: {fileID: 6594264935350530494}
+  outputModuleKnob: {fileID: -7908206687617785955}
+  scale: 0.125
+  bias: -0.75
+--- !u!114 &-2900568388099485322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763a27e18101c4a928b9f2e695943904, type: 3}
+  m_Name: RidgedMultifractal
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -157.5, y: -347}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  width: 100
+  height: 100
+  defaultTex: {fileID: 0}
+  outputModuleKnob: {fileID: -6822885855971615606}
+  frequency: 1
+  lacunarity: 2
+  octaveCount: 6
+  seed: 0
+--- !u!114 &-1482455829609006920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ab6487237ff124ea4c2aa5de9ce3fb, type: 3}
+  m_Name: MainEditorState
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  parentEditor: {fileID: 0}
+  selectedNode: {fileID: 0}
+  panOffset: {x: 0, y: 0}
+  zoom: 1.33
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a89c36c30b2e940804d7efcccaf0bd, type: 3}
+  m_Name: MesaCanvas
+  m_EditorClassIdentifier: 
+  editorStates:
+  - {fileID: -1482455829609006920}
+  saveName: MesaCanvas
+  savePath: Assets/BurstLibNoise/BurstLibNoise_Editor/Resources/Saves/MesaCanvas.asset
+  livesInScene: 0
+  nodes:
+  - {fileID: 3503944098608491108}
+  - {fileID: 4217235468175931705}
+  - {fileID: -3059584454766838271}
+  - {fileID: 7255842011947824354}
+  - {fileID: -2900568388099485322}
+  - {fileID: 4676612951847824732}
+  groups: []
+--- !u!114 &624393768636367126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 3503944098608491108}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 4820782405459729496}
+  side: 4
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &2456462459600119920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 3503944098608491108}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -6822885855971615606}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &3390278508213044122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 7255842011947824354}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 6594264935350530494}
+  side: 2
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &3503944098608491108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d39f181232b0487e97bc039e3034e92, type: 3}
+  m_Name: Select
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 175.5, y: -101}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  width: 100
+  height: 100
+  defaultTex: {fileID: 0}
+  inputModule1Knob: {fileID: 2456462459600119920}
+  inputModule2Knob: {fileID: 6561558099808003051}
+  inputModule3Knob: {fileID: 624393768636367126}
+  outputModuleKnob: {fileID: 7432153035494612309}
+--- !u!114 &4217235468175931705
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a6dffb14f78467a8280820a56de0ec, type: 3}
+  m_Name: Perlin
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -279.5, y: 158}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  width: 100
+  height: 100
+  defaultTex: {fileID: 0}
+  outputModuleKnob: {fileID: 4820782405459729496}
+  frequency: 0.5
+  lacunarity: 2
+  persistence: 0.25
+  octaveCount: 6
+  seed: 0
+--- !u!114 &4676612951847824732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38508b8d825d344ada64f68732519421, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 361.62, y: -44.28}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  width: 100
+  height: 100
+  defaultTex: {fileID: 0}
+  inputModuleKnob: {fileID: 8078005451057712571}
+  noiseName: MesaBiome
+--- !u!114 &4820782405459729496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 4217235468175931705}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 624393768636367126}
+  side: 2
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &6561558099808003051
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 3503944098608491108}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -7908206687617785955}
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &6594264935350530494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -3059584454766838271}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 3390278508213044122}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &7255842011947824354
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b2c41a45d3d47d0ab1cda85fc80898, type: 3}
+  m_Name: Billow
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -310.5, y: -100}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  width: 100
+  height: 100
+  defaultTex: {fileID: 0}
+  outputModuleKnob: {fileID: 3390278508213044122}
+  frequency: 2
+  lacunarity: 2
+  persistence: 0.5
+  octaveCount: 6
+  seed: 0
+--- !u!114 &7432153035494612309
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 3503944098608491108}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 8078005451057712571}
+  side: 2
+  sidePosition: 85.5
+  sideOffset: 0
+--- !u!114 &8078005451057712571
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 4676612951847824732}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 7432153035494612309}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0

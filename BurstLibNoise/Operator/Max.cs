@@ -12,6 +12,11 @@ namespace BurstLibNoise.Operator
             return new ModuleData(ModuleType.Max, sources);
         }
 
+        public static BurstModuleBase ParseData(ModuleData[] moduleData, ref ModuleData data) {
+            return new Max(StaticMapper.ParseModuleData(moduleData, ref moduleData[data.source1]),
+                StaticMapper.ParseModuleData(moduleData, ref moduleData[data.source2]));
+        }
+
         // Must be included in each file because Unity does not support C# 8.0 not supported yet (default interface implementation)
         public BurstModuleBase Source(int i) {
             return (BurstModuleBase) Modules[i];
