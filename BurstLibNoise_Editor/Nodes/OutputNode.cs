@@ -68,6 +68,7 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 			data.Dispose();
 			
 			AssetDatabase.SaveAssets ();
+			EditorUtility.SetDirty(noiseSettings);
 		}
 	}
 }
