@@ -6,14 +6,17 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 {
 	public abstract class BurstLibNoiseNode : Node
 	{
+		public const string NOISE_SETTINGS_SAVE_FOLDER = "Assets/BurstLibNoise/BurstLibNoise/NoiseSettings/";
+
 		public override Vector2 DefaultSize { get { return new Vector2(120, 230); } }
-		// public override bool AutoLayout { get { return true; } }
+		public override Vector2 MinSize { get { return new Vector2(130, 30); } }
+		public override bool AutoLayout { get { return true; } }
         
 		[System.NonSerialized]
 		public Texture2D tex;
 
-		public int width = 100;
-		public int height = 100;
+		private int width = 120;
+		private int height = 120;
 
         public Texture2D defaultTex;
 

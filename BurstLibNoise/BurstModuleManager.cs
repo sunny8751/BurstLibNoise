@@ -102,6 +102,7 @@ namespace BurstLibNoise
         }
 
         public static BurstModuleBase ParseModuleData(ModuleData[] moduleData) {
+            Debug.Assert(moduleData.Length > 0);
             return StaticMapper.ParseModuleData(moduleData, ref moduleData[0]);
         }
 

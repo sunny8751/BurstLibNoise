@@ -11,7 +11,6 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 	[Node(false, "Output")]
 	public class OutputNode : BurstLibNoiseNode
 	{
-		private const string NOISE_SETTINGS_SAVE_FOLDER = "Assets/BurstLibNoise/BurstLibNoise/NoiseSettings/";
 
 		public const string ID = "outputNode";
 		public override string GetID { get { return ID; } }
@@ -22,43 +21,38 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 		[ValueConnectionKnob("", Direction.In, "BurstModuleBase")]
 		public ValueConnectionKnob inputModuleKnob;
 
-		public string noiseName;
+		public string assetPath;
 		
 		public override void BurstLibNoiseNodeGUI()
 		{
-			backgroundColor = CanCalculate() ? Color.grey : Color.red;
             inputModuleKnob.DisplayLayout();
 
-			noiseName = EditorGUILayout.TextField(noiseName);
+			GUILayout.Label(System.IO.Path.GetFileNameWithoutExtension(assetPath));
 
 			if (GUILayout.Button("Save")) {
-				if (CanCalculate()) {
-					BurstModuleBase inputModule = inputModuleKnob.GetValue<BurstModuleBase>();
-					SaveModule(inputModule, noiseName);
-				}
+				BurstModuleBase inputModule = inputModuleKnob.GetValue<BurstModuleBase>();
+				SaveModule(inputModule);
 			}
 		}
 
-		// public override bool Calculate()
-		// {
-        //     if (CanCalculate()) {
-	    //         BurstModuleBase inputModule = inputModuleKnob.GetValue<BurstModuleBase>();
-		// 		SaveModule(inputModule, noiseName);
-        //     }
-		// 	return true;
-		// }
-
-		private bool CanCalculate() {
-			return inputModuleKnob.connected() && !string.IsNullOrEmpty(noiseName);
+		private bool CanSave() {
+			return inputModuleKnob.connected() && !string.IsNullOrEmpty(assetPath);
 		}
 
-		private void SaveModule(BurstModuleBase moduleBase, string name) {
-			string assetPath = NOISE_SETTINGS_SAVE_FOLDER + name.Replace(" ", "") + ".asset";
+		private void SaveModule(BurstModuleBase moduleBase) {
+			if (string.IsNullOrEmpty(assetPath)) {
+				string absolutePath = UnityEditor.EditorUtility.SaveFilePanel("Save NoiseSettings", NOISE_SETTINGS_SAVE_FOLDER, "noiseSettings", "asset");
+				Debug.Assert(absolutePath.StartsWith(Application.dataPath));
+				assetPath =  "Assets" + absolutePath.Substring(Application.dataPath.Length);
+			}
+			Debug.Assert(!string.IsNullOrEmpty(assetPath));
 
 			NoiseSettings noiseSettings;
 			if (File.Exists(assetPath)) {
+				// overwrite existing
 				noiseSettings = (NoiseSettings) AssetDatabase.LoadAssetAtPath(assetPath, typeof(NoiseSettings));
 			} else {
+				// save as new
 				noiseSettings = (NoiseSettings) ScriptableObject.CreateInstance("NoiseSettings");
 				AssetDatabase.CreateAsset (noiseSettings, assetPath);
 			}
@@ -67,7 +61,7 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 			noiseSettings.moduleData = data.ToArray();
 			data.Dispose();
 			
-			AssetDatabase.SaveAssets ();
+			AssetDatabase.SaveAssets();
 			EditorUtility.SetDirty(noiseSettings);
 		}
 	}
