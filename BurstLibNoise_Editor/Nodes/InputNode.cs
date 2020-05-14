@@ -8,7 +8,7 @@ using UnityEngine.Windows;
 
 namespace NodeEditorFramework.BurstLibNoiseEditor
 {
-	[Node(false, "Input")]
+	[Node(false, "NoiseSettings/Input")]
 	public class InputNode : BurstLibNoiseNode
 	{
 		public const string ID = "inputNode";
@@ -39,7 +39,7 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 		private void LoadNoiseSettings() {
 			string absolutePath = UnityEditor.EditorUtility.OpenFilePanel("Load NoiseSettings", NOISE_SETTINGS_SAVE_FOLDER, "asset");
 			Debug.Assert(absolutePath.StartsWith(Application.dataPath));
-			assetPath =  "Assets" + absolutePath.Substring(Application.dataPath.Length);
+			assetPath = "Assets" + absolutePath.Substring(Application.dataPath.Length);
 		}
 
 		public override bool Calculate()
@@ -52,7 +52,7 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
                 tex = defaultTex;
 				return false;
 			}
-			BurstModuleBase module = BurstModuleManager.ParseModuleData(((NoiseSettings) AssetDatabase.LoadAssetAtPath(assetPath, typeof(NoiseSettings))).moduleData);
+			BurstModuleBase module = ParseModuleData(((NoiseSettings) AssetDatabase.LoadAssetAtPath(assetPath, typeof(NoiseSettings))).moduleData);
 			outputModuleKnob.SetValue(module);
 			tex = GenerateTex(module);
 			return true;

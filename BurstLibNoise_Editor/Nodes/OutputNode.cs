@@ -8,7 +8,7 @@ using UnityEngine.Windows;
 
 namespace NodeEditorFramework.BurstLibNoiseEditor
 {
-	[Node(false, "Output")]
+	[Node(false, "NoiseSettings/Output")]
 	public class OutputNode : BurstLibNoiseNode
 	{
 
@@ -29,21 +29,16 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 
 			GUILayout.Label(System.IO.Path.GetFileNameWithoutExtension(assetPath));
 
-			if (GUILayout.Button("Save")) {
-				BurstModuleBase inputModule = inputModuleKnob.GetValue<BurstModuleBase>();
-				SaveModule(inputModule);
+			if (inputModuleKnob.connected() && GUILayout.Button("Save")) {
+				SaveModule();
 			}
 		}
 
-		private bool CanSave() {
-			return inputModuleKnob.connected() && !string.IsNullOrEmpty(assetPath);
-		}
-
-		private void SaveModule(BurstModuleBase moduleBase) {
+		private void SaveModule() {
 			if (string.IsNullOrEmpty(assetPath)) {
 				string absolutePath = UnityEditor.EditorUtility.SaveFilePanel("Save NoiseSettings", NOISE_SETTINGS_SAVE_FOLDER, "noiseSettings", "asset");
 				Debug.Assert(absolutePath.StartsWith(Application.dataPath));
-				assetPath =  "Assets" + absolutePath.Substring(Application.dataPath.Length);
+				assetPath = "Assets" + absolutePath.Substring(Application.dataPath.Length);
 			}
 			Debug.Assert(!string.IsNullOrEmpty(assetPath));
 
@@ -57,9 +52,7 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 				AssetDatabase.CreateAsset (noiseSettings, assetPath);
 			}
 			
-			NativeArray<ModuleData> data = BurstModuleManager.CreateModuleData(moduleBase);
-			noiseSettings.moduleData = data.ToArray();
-			data.Dispose();
+			noiseSettings.moduleData = GetModuleData(inputModuleKnob.GetValue<BurstModuleBase>());
 			
 			AssetDatabase.SaveAssets();
 			EditorUtility.SetDirty(noiseSettings);

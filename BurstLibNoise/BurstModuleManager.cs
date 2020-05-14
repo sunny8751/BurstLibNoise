@@ -95,7 +95,7 @@ namespace BurstLibNoise
             int index = modules.Count - 1;
             int[] sources = new int[((ModuleBase) module).SourceModuleCount];
             for (int i = 0; i < sources.Length; i++) {
-                sources[i] = CreateModuleDataHelper(modules, module.Source(i)); // add one for the current module
+                sources[i] = CreateModuleDataHelper(modules, module.Source(i));
             }
             modules[index] = module.GetData(sources);
             return index;

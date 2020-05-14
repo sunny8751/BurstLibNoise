@@ -1,6 +1,7 @@
 using UnityEngine;
 using BurstLibNoise;
 using UnityEditor;
+using Unity.Collections;
 
 namespace NodeEditorFramework.BurstLibNoiseEditor
 {
@@ -56,6 +57,18 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 
 			if (GUI.changed)
 				NodeEditor.curNodeCanvas.OnNodeChange(this);
+		}
+
+		protected virtual ModuleData[] GetModuleData(BurstModuleBase module) {
+			ModuleData[] moduleData;
+			NativeArray<ModuleData> data = BurstModuleManager.CreateModuleData(module);
+			moduleData = data.ToArray();
+			data.Dispose();
+			return moduleData;
+		}
+
+		protected virtual BurstModuleBase ParseModuleData(ModuleData[] moduleData) {
+			return BurstModuleManager.ParseModuleData(moduleData);
 		}
 
 		protected Texture2D GenerateTex(BurstModuleBase module) {
