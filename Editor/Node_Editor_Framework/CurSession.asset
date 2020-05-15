@@ -1,0 +1,747 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8604309535440055569
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1ed0aac5df34949949ceeb2db50b5c, type: 3}
+  m_Name: BiomeSelectModule
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -306.385, y: 16.57}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  defaultTex: {fileID: 0}
+  tolerances:
+  - -0.4
+  - 0.2
+  - 0
+  - 0
+  fallOff: 0
+  inputModule1Knob: {fileID: -19028773521549484}
+  inputModule2Knob: {fileID: -3341648501790244368}
+  inputModule3Knob: {fileID: -8475787396381517415}
+  inputModule4Knob: {fileID: 7875527583695539256}
+  inputModuleControllerKnob: {fileID: 899776148358378980}
+  outputModuleKnob: {fileID: 3714259710003322113}
+--- !u!114 &-8475787396381517415
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -8604309535440055569}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -3688329597465257451}
+  side: 4
+  sidePosition: 102.5
+  sideOffset: 0
+--- !u!114 &-8408368856541024701
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -4268542219842581454}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 6067353319715463131}
+  side: 2
+  sidePosition: 192.5
+  sideOffset: 0
+--- !u!114 &-7733826407514051065
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 7772994374157847672}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -1212199229186365291}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-7260351394850299797
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 1111897126465279502}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -2621025745154994733}
+  side: 4
+  sidePosition: 65.5
+  sideOffset: 0
+--- !u!114 &-6821840521476014325
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ab6487237ff124ea4c2aa5de9ce3fb, type: 3}
+  m_Name: MainEditorState
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  parentEditor: {fileID: 0}
+  selectedNode: {fileID: 0}
+  panOffset: {x: 299.38998, y: -111.249985}
+  zoom: 1.3
+--- !u!114 &-5173158018948685251
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 1111897126465279502}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 4846249902309187073}
+  side: 4
+  sidePosition: 102.5
+  sideOffset: 0
+--- !u!114 &-5064586433457500037
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebb216eb5b624a81aa504e4623354ab, type: 3}
+  m_Name: Planet Output
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -90.95499, y: 111.76}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  defaultTex: {fileID: 0}
+  inputModuleKnob: {fileID: 4110114495150725009}
+  assetPath: Assets/VoxelPlanet/BurstLibNoise/NoiseSettings/PlanetColor.asset
+--- !u!114 &-4268542219842581454
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e3d65bc67da47ec9ee6ebc5ea0e3cf, type: 3}
+  m_Name: NoiseColorInput
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -795.695, y: -307.40997}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  defaultTex: {fileID: 0}
+  assetPath: Assets/VoxelPlanet/BurstLibNoise/NoiseColorSettings/GrasslandBiome.asset
+  outputModuleNoiseKnob: {fileID: -8408368856541024701}
+  outputModuleColorKnob: {fileID: 1785779822042819}
+--- !u!114 &-3759403585300681486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e3d65bc67da47ec9ee6ebc5ea0e3cf, type: 3}
+  m_Name: NoiseColorInput
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -792.7399, y: -67.5}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  defaultTex: {fileID: 0}
+  assetPath: Assets/VoxelPlanet/BurstLibNoise/NoiseColorSettings/MountainBiome.asset
+  outputModuleNoiseKnob: {fileID: -2621025745154994733}
+  outputModuleColorKnob: {fileID: -474484434659487877}
+--- !u!114 &-3688329597465257451
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 6827082505142743018}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -8475787396381517415}
+  side: 2
+  sidePosition: 211.5
+  sideOffset: 0
+--- !u!114 &-3341648501790244368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -8604309535440055569}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -474484434659487877}
+  side: 4
+  sidePosition: 65.5
+  sideOffset: 0
+--- !u!114 &-3119706636668172836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 1111897126465279502}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections: []
+  side: 4
+  sidePosition: 121.5
+  sideOffset: 0
+--- !u!114 &-2621025745154994733
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -3759403585300681486}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -7260351394850299797}
+  side: 2
+  sidePosition: 192.5
+  sideOffset: 0
+--- !u!114 &-1781772423118029831
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 6620010938935063176}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 899776148358378980}
+  side: 2
+  sidePosition: 117.5
+  sideOffset: 0
+--- !u!114 &-1212199229186365291
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -873949045890678118}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -7733826407514051065}
+  side: 2
+  sidePosition: 117.5
+  sideOffset: 0
+--- !u!114 &-1067725780990872408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 1111897126465279502}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections: []
+  side: 4
+  sidePosition: 140.5
+  sideOffset: 0
+--- !u!114 &-873949045890678118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a2fce38238b84f98bafa5e8b29524e7, type: 3}
+  m_Name: SphereProjection
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -117.67497, y: -172.14001}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  defaultTex: {fileID: 0}
+  planetCenter: {x: 0, y: 0, z: 0}
+  radius: 1000
+  scale: 0.006
+  inputModuleKnob: {fileID: -106111745466743152}
+  outputModuleKnob: {fileID: -1212199229186365291}
+--- !u!114 &-474484434659487877
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -3759403585300681486}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -3341648501790244368}
+  side: 2
+  sidePosition: 211.5
+  sideOffset: 0
+--- !u!114 &-106111745466743152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -873949045890678118}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 7717199619912297710}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-19028773521549484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -8604309535440055569}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 1785779822042819}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a89c36c30b2e940804d7efcccaf0bd, type: 3}
+  m_Name: CurSession
+  m_EditorClassIdentifier: 
+  editorStates:
+  - {fileID: -6821840521476014325}
+  saveName: PlanetCanvas
+  savePath: Assets/VoxelPlanet/BurstLibNoise/Canvas/PlanetCanvas.asset
+  livesInScene: 0
+  nodes:
+  - {fileID: -4268542219842581454}
+  - {fileID: 1111897126465279502}
+  - {fileID: -8604309535440055569}
+  - {fileID: 7772994374157847672}
+  - {fileID: -5064586433457500037}
+  - {fileID: 6620010938935063176}
+  - {fileID: -873949045890678118}
+  - {fileID: -3759403585300681486}
+  - {fileID: 6827082505142743018}
+  groups: []
+--- !u!114 &1785779822042819
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -4268542219842581454}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -19028773521549484}
+  side: 2
+  sidePosition: 211.5
+  sideOffset: 0
+--- !u!114 &899776148358378980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -8604309535440055569}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -1781772423118029831}
+  side: 4
+  sidePosition: 140.5
+  sideOffset: 0
+--- !u!114 &1028183940265153131
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 6620010938935063176}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections: []
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &1111897126465279502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1ed0aac5df34949949ceeb2db50b5c, type: 3}
+  m_Name: BiomeSelectModule
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -311.395, y: -217.23}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  defaultTex: {fileID: 0}
+  tolerances:
+  - -0.4
+  - 0.2
+  - 0
+  - 0
+  fallOff: 0.15
+  inputModule1Knob: {fileID: 6067353319715463131}
+  inputModule2Knob: {fileID: -7260351394850299797}
+  inputModule3Knob: {fileID: -5173158018948685251}
+  inputModule4Knob: {fileID: -3119706636668172836}
+  inputModuleControllerKnob: {fileID: -1067725780990872408}
+  outputModuleKnob: {fileID: 7717199619912297710}
+--- !u!114 &3714259710003322113
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -8604309535440055569}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 4110114495150725009}
+  side: 2
+  sidePosition: 177.5
+  sideOffset: 0
+--- !u!114 &4110114495150725009
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -5064586433457500037}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: 3714259710003322113}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &4846249902309187073
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 6827082505142743018}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -5173158018948685251}
+  side: 2
+  sidePosition: 192.5
+  sideOffset: 0
+--- !u!114 &6067353319715463131
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 1111897126465279502}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -8408368856541024701}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &6620010938935063176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a2fce38238b84f98bafa5e8b29524e7, type: 3}
+  m_Name: SphereProjection
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -330.90494, y: 364.01996}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  defaultTex: {fileID: 0}
+  planetCenter: {x: 0, y: 0, z: 0}
+  radius: 1000
+  scale: 0.006
+  inputModuleKnob: {fileID: 1028183940265153131}
+  outputModuleKnob: {fileID: -1781772423118029831}
+--- !u!114 &6827082505142743018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e3d65bc67da47ec9ee6ebc5ea0e3cf, type: 3}
+  m_Name: NoiseColorInput
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -795.33997, y: 165.19998}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  defaultTex: {fileID: 0}
+  assetPath: Assets/VoxelPlanet/BurstLibNoise/NoiseColorSettings/MesaBiome.asset
+  outputModuleNoiseKnob: {fileID: 4846249902309187073}
+  outputModuleColorKnob: {fileID: -3688329597465257451}
+--- !u!114 &7717199619912297710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 1111897126465279502}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: BurstModuleBase
+  _connections:
+  - {fileID: -106111745466743152}
+  side: 2
+  sidePosition: 177.5
+  sideOffset: 0
+--- !u!114 &7772994374157847672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebb216eb5b624a81aa504e4623354ab, type: 3}
+  m_Name: Planet Output
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 74.37501, y: -135.4}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  defaultTex: {fileID: 0}
+  inputModuleKnob: {fileID: -7733826407514051065}
+  assetPath: Assets/VoxelPlanet/BurstLibNoise/NoiseSettings/PlanetNoise.asset
+--- !u!114 &7875527583695539256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -8604309535440055569}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: BurstModuleBase
+  _connections: []
+  side: 4
+  sidePosition: 121.5
+  sideOffset: 0
