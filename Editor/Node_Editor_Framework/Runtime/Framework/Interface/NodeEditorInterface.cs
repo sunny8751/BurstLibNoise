@@ -9,8 +9,6 @@ namespace NodeEditorFramework.Standard
 {
 	public class NodeEditorInterface
 	{
-		public const string CANVAS_SAVE_FOLDER = "Assets/VoxelPlanet/BurstLibNoise/Canvas/";
-
 		public NodeEditorUserCache canvasCache;
 		public Action<GUIContent> ShowNotificationAction;
 
@@ -175,7 +173,7 @@ namespace NodeEditorFramework.Standard
 #if UNITY_EDITOR
 		private void LoadCanvas()
 		{
-			string path = UnityEditor.EditorUtility.OpenFilePanel("Load Node Canvas", CANVAS_SAVE_FOLDER, "asset");
+			string path = UnityEditor.EditorUtility.OpenFilePanel("Load Node Canvas", "Assets/", "asset");
 			if (!path.Contains(Application.dataPath))
 			{
 				if (!string.IsNullOrEmpty(path))
@@ -217,7 +215,7 @@ namespace NodeEditorFramework.Standard
 
 		private void SaveCanvasAs()
 		{
-			string panelPath = CANVAS_SAVE_FOLDER;
+			string panelPath = "Assets/";
 			string panelFileName = "Node Canvas";
 			if (canvasCache.nodeCanvas != null && !string.IsNullOrEmpty(canvasCache.nodeCanvas.savePath))
 			{

@@ -7,7 +7,7 @@ namespace NodeEditorFramework.BurstLibNoiseEditor
 {
 	public abstract class BurstLibNoiseNode : Node
 	{
-		public const string NOISE_SETTINGS_SAVE_FOLDER = "Assets/VoxelPlanet/BurstLibNoise/NoiseSettings/";//"Assets/BurstLibNoise/BurstLibNoise/NoiseSettings/";
+		public const string NOISE_SETTINGS_SAVE_FOLDER = "Assets/BurstLibNoise/BurstLibNoise/NoiseSettings/";
 
 		public override Vector2 DefaultSize { get { return new Vector2(120, 230); } }
 		public override Vector2 MinSize { get { return new Vector2(130, 30); } }
